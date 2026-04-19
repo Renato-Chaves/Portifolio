@@ -5,6 +5,6 @@ services:
     working_dir: /app
     volumes:
       - ./portifolio:/app
-    command: sh -c "npm install && npm run dev"
-    expose:
-      - "3000"
+    command: sh -c "npm install && npm run dev -- -H 0.0.0.0 -p 3000"
+    ports:
+      - "8050:3000"

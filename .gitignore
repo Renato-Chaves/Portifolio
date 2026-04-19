@@ -1,0 +1,13 @@
+# AI tooling
+.opencode/
+.claude/
+AGENTS.md
+CLAUDE.md
+
+# Design reference (Claude Design export + planning notes)
+ClaudeDesignProject/
+DESIGN_BRIEF.md
+DESIGN_CHAT_LOG.md
+
+# OS
+.DS_Store

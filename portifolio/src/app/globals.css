@@ -1,26 +1,316 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --sw-bg: #07101f;
+  --sw-bg-2: #0b1a33;
+  --sw-ink: #dbe7f5;
+  --sw-mute: #6b84a6;
+  --sw-accent: #67b4ff;
+  --sw-accent-2: #6ef0e8;
+  --sw-grid: rgba(103, 180, 255, 0.08);
+
+  --gd-bg: #2a1246;
+  --gd-bg-2: #ff5a7c;
+  --gd-ink: #fff7dc;
+  --gd-accent: #ffd23f;
+  --gd-accent-2: #5cffb7;
+  --gd-accent-3: #ff6b9e;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-sw-bg: var(--sw-bg);
+  --color-sw-bg-2: var(--sw-bg-2);
+  --color-sw-ink: var(--sw-ink);
+  --color-sw-mute: var(--sw-mute);
+  --color-sw-accent: var(--sw-accent);
+  --color-sw-accent-2: var(--sw-accent-2);
+  --color-gd-bg: var(--gd-bg);
+  --color-gd-bg-2: var(--gd-bg-2);
+  --color-gd-ink: var(--gd-ink);
+  --color-gd-accent: var(--gd-accent);
+  --color-gd-accent-2: var(--gd-accent-2);
+  --color-gd-accent-3: var(--gd-accent-3);
+  --font-space-grotesk: var(--font-space-grotesk);
+  --font-jetbrains-mono: var(--font-jetbrains-mono);
+  --font-press-start: var(--font-press-start);
+  --font-vt323: var(--font-vt323);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
+html,
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  background: #000;
+  overflow: hidden;
+  color: #fff;
+  font-family: var(--font-space-grotesk), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
 }
+
+/* Hide real cursor over themed panels — custom cursor overlays take over. */
+.cursor-sw,
+.cursor-sw *,
+.cursor-gd,
+.cursor-gd * {
+  cursor: none !important;
+}
+
+/* ---------- Software keyframes ---------- */
+@keyframes swBlink {
+  0%, 70%, 100% { opacity: 1; }
+  80% { opacity: 0.2; }
+}
+
+@keyframes swScroll {
+  0% { top: 0; opacity: 1; }
+  70% { top: 80px; opacity: 0; }
+  71% { top: 0; opacity: 0; }
+  100% { top: 0; opacity: 1; }
+}
+
+/* ---------- GameDev keyframes ---------- */
+@keyframes gdTwinkle {
+  50% { opacity: 0.5; }
+}
+
+@keyframes gdSunPulse {
+  50% { transform: translate(-50%, -50%) scale(1.08); }
+}
+
+@keyframes gdBob {
+  50% { transform: translateY(-4px); }
+}
+
+@keyframes gdBlink {
+  50% { opacity: 0; }
+}
+
+@keyframes gdArrow {
+  50% { transform: translateX(4px); }
+}
+
+@keyframes gdScroll {
+  50% { transform: translateY(6px); }
+}
+
+/* ---------- Shared stage slide ---------- */
+.identity-stage {
+  position: absolute;
+  inset: 0;
+  transition: transform 0.9s cubic-bezier(0.76, 0, 0.24, 1);
+  will-change: transform;
+}
+
+/* ---------- SW grid overlay ---------- */
+.sw-grid-bg {
+  position: absolute;
+  inset: -20%;
+  background-image:
+    linear-gradient(var(--sw-grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--sw-grid) 1px, transparent 1px);
+  background-size: 64px 64px;
+  mask-image: radial-gradient(ellipse at center, black 40%, transparent 85%);
+  -webkit-mask-image: radial-gradient(ellipse at center, black 40%, transparent 85%);
+  pointer-events: none;
+  transform-origin: center;
+}
+
+/* ---------- SW scroll indicator ---------- */
+.sw-scroll-track {
+  width: 1px;
+  height: 110px;
+  background: rgba(103, 180, 255, 0.2);
+  position: relative;
+}
+.sw-scroll-track::after {
+  content: "";
+  position: absolute;
+  left: -1.5px;
+  top: 0;
+  width: 4px;
+  height: 30px;
+  background: var(--sw-accent);
+  box-shadow: 0 0 8px var(--sw-accent);
+  animation: swScroll 1.8s ease-in-out infinite;
+}
+
+/* ---------- SW button ---------- */
+.sw-enter-inner {
+  display: inline-flex;
+  align-items: stretch;
+  border: 1px solid rgba(103, 180, 255, 0.35);
+  background: linear-gradient(135deg, rgba(103, 180, 255, 0.06), rgba(110, 240, 232, 0.03));
+  backdrop-filter: blur(6px);
+  transition: border-color 0.3s, background 0.3s, transform 0.3s;
+}
+.sw-enter:hover .sw-enter-inner {
+  border-color: var(--sw-accent);
+  background: linear-gradient(135deg, rgba(103, 180, 255, 0.18), rgba(110, 240, 232, 0.08));
+  transform: translateX(4px);
+}
+.sw-enter-arrow {
+  display: grid;
+  place-items: center;
+  padding: 0 18px;
+  border-left: 1px solid rgba(103, 180, 255, 0.35);
+  background: rgba(103, 180, 255, 0.08);
+  color: var(--sw-accent);
+  transition: background 0.3s, color 0.3s;
+}
+.sw-enter:hover .sw-enter-arrow {
+  background: var(--sw-accent);
+  color: #051020;
+}
+
+/* ---------- SW corner brackets ---------- */
+.sw-bracket {
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  border-color: var(--sw-accent);
+  opacity: 0.6;
+}
+.sw-bracket.tl { top: 0; left: 0; border-top: 1px solid; border-left: 1px solid; }
+.sw-bracket.tr { top: 0; right: 0; border-top: 1px solid; border-right: 1px solid; }
+.sw-bracket.bl { bottom: 0; left: 0; border-bottom: 1px solid; border-left: 1px solid; }
+.sw-bracket.br { bottom: 0; right: 0; border-bottom: 1px solid; border-right: 1px solid; }
+
+/* ---------- SW stats bar ---------- */
+.sw-stats-bar {
+  display: block;
+  width: 80px;
+  height: 2px;
+  background: rgba(103, 180, 255, 0.15);
+  margin-top: 4px;
+  position: relative;
+}
+.sw-stats-bar::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: var(--v, 40%);
+  background: var(--sw-accent);
+  box-shadow: 0 0 8px var(--sw-accent);
+}
+
+/* ---------- GD ambient bits ---------- */
+.gd-stars {
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(1px 1px at 12% 18%, #fff, transparent),
+    radial-gradient(1px 1px at 28% 8%, #fff, transparent),
+    radial-gradient(1px 1px at 42% 22%, #fff, transparent),
+    radial-gradient(2px 2px at 55% 12%, #ffe, transparent),
+    radial-gradient(1px 1px at 68% 28%, #fff, transparent),
+    radial-gradient(1px 1px at 78% 6%, #fff, transparent),
+    radial-gradient(2px 2px at 88% 20%, #fff, transparent),
+    radial-gradient(1px 1px at 8% 32%, #fff, transparent),
+    radial-gradient(1px 1px at 35% 35%, #fff, transparent),
+    radial-gradient(1px 1px at 92% 38%, #fff, transparent);
+  animation: gdTwinkle 4s infinite;
+  pointer-events: none;
+}
+
+.gd-sun {
+  position: absolute;
+  left: 50%;
+  top: 52%;
+  transform: translate(-50%, -50%);
+  width: 360px;
+  height: 360px;
+  background: radial-gradient(circle, #ffd23f 0%, #ff6b9e 55%, transparent 75%);
+  border-radius: 50%;
+  filter: blur(2px);
+  pointer-events: none;
+  animation: gdSunPulse 4s ease-in-out infinite;
+}
+
+.gd-sun-stripes {
+  position: absolute;
+  left: 50%;
+  top: 52%;
+  transform: translate(-50%, -50%);
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  background: repeating-linear-gradient(180deg, #ffd23f 0 22px, #ff9567 22px 30px, transparent 30px 38px);
+  mask: radial-gradient(circle, black 48%, transparent 50%);
+  -webkit-mask: radial-gradient(circle, black 48%, transparent 50%);
+  pointer-events: none;
+}
+
+.gd-ground {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 60px;
+  background: linear-gradient(180deg, transparent 0, #3a0f5e 10px, #2a0a48 100%);
+  pointer-events: none;
+}
+.gd-ground::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 8px;
+  height: 12px;
+  background-image: repeating-linear-gradient(90deg, #5cffb7 0 16px, #2ee08f 16px 32px);
+  image-rendering: pixelated;
+}
+
+.gd-scanlines {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: repeating-linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.08) 0px,
+    rgba(0, 0, 0, 0.08) 2px,
+    transparent 2px,
+    transparent 4px
+  );
+  mix-blend-mode: multiply;
+  opacity: 0.6;
+}
+
+/* ---------- GD start button cartridge ---------- */
+.gd-start-body {
+  display: inline-block;
+  padding: 18px 32px 16px;
+  background: #ff3e6b;
+  color: #fff7dc;
+  letter-spacing: 0.1em;
+  box-shadow:
+    0 6px 0 #9e1f3f,
+    0 10px 0 #3a0f5e,
+    inset 0 -4px 0 rgba(0, 0, 0, 0.15),
+    inset 0 4px 0 rgba(255, 255, 255, 0.25);
+  text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.35);
+  position: relative;
+  image-rendering: pixelated;
+}
+.gd-start-body::before,
+.gd-start-body::after {
+  content: "";
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background: #fff7dc;
+  top: 6px;
+}
+.gd-start-body::before { left: 6px; }
+.gd-start-body::after { right: 6px; }
+.gd-start:hover .gd-start-body { background: #ff6b9e; }
+
+/* ---------- SW code fragment colors ---------- */
+.sw-code .ln { color: rgba(103, 180, 255, 0.35); margin-right: 10px; }
+.sw-code .kw { color: #c48eff; }
+.sw-code .fn { color: var(--sw-accent); }
+.sw-code .st { color: var(--sw-accent-2); }
+.sw-code .cm { color: rgba(107, 132, 166, 0.6); font-style: italic; }
