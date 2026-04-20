@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
+import { notFound } from "next/navigation";
 import { Space_Grotesk, JetBrains_Mono, Press_Start_2P, VT323 } from "next/font/google";
-import "./globals.css";
+import { hasLocale } from "@/lib/i18n";
+import "../globals.css";
 
 const spaceGrotesk = Space_Grotesk({
   variable: "--font-space-grotesk",
@@ -31,12 +33,19 @@ export const metadata: Metadata = {
   description: "Two parallel identities: Software Developer and Game Developer.",
 };
 
-export default function RootLayout({
+export async function generateStaticParams() {
+  return [{ lang: "en" }, { lang: "pt" }];
+}
+
+export default async function RootLayout({
   children,
-}: Readonly<{ children: React.ReactNode }>) {
+  params,
+}: LayoutProps<"/[lang]">) {
+  const { lang } = await params;
+  if (!hasLocale(lang)) notFound();
   return (
     <html
-      lang="en"
+      lang={lang}
       className={`${spaceGrotesk.variable} ${jetBrainsMono.variable} ${pressStart2P.variable} ${vt323.variable}`}
     >
       <body>{children}</body>

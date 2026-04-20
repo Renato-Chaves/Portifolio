@@ -2,8 +2,16 @@
 
 import Link from "next/link";
 import { GameScene } from "@/components/canvas/GameScene";
+import type { Dictionary, Locale } from "@/lib/i18n";
 
-export default function GamedevComingSoon() {
+export function GamedevComingSoon({
+  dict,
+  locale,
+}: {
+  dict: Dictionary;
+  locale: Locale;
+}) {
+  const g = dict.gamedev;
   return (
     <main
       className="relative h-screen w-screen overflow-hidden"
@@ -39,7 +47,7 @@ export default function GamedevComingSoon() {
               animation: "gdBob 2.2s ease-in-out infinite",
             }}
           >
-            &gt; PLAYER 02 &lt;
+            {g.player}
           </div>
 
           <h1
@@ -55,9 +63,9 @@ export default function GamedevComingSoon() {
                 "4px 4px 0 var(--gd-accent-3), 8px 8px 0 #3a0f5e, 12px 12px 0 rgba(0,0,0,0.3)",
             }}
           >
-            COMING
+            {g.comingLine1}
             <br />
-            <span style={{ color: "var(--gd-accent)" }}>SOON</span>
+            <span style={{ color: "var(--gd-accent)" }}>{g.comingLine2}</span>
           </h1>
 
           <div
@@ -71,14 +79,14 @@ export default function GamedevComingSoon() {
               textShadow: "2px 2px 0 rgba(0,0,0,0.35)",
             }}
           >
-            THE GAME DEVELOPER PORTFOLIO IS UNDER CONSTRUCTION.
+            {g.body1}
             <br />
-            CHECK BACK SOON FOR TINY MACHINES{" "}
+            {g.body2Prefix}{" "}
             <span style={{ animation: "gdBlink 0.9s steps(2) infinite" }}>▮</span>
           </div>
 
           <Link
-            href="/"
+            href={`/${locale}`}
             aria-label="Back to selection"
             className="gd-start"
             style={{
@@ -91,9 +99,7 @@ export default function GamedevComingSoon() {
               transition: "transform 0.18s",
             }}
           >
-            <span className="gd-start-body">
-              ◀ PRESS B · BACK
-            </span>
+            <span className="gd-start-body">{g.back}</span>
           </Link>
         </div>
       </div>

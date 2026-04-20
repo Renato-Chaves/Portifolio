@@ -2,8 +2,10 @@
 
 import { forwardRef } from "react";
 import { SoftwareNetwork } from "@/components/canvas/SoftwareNetwork";
+import type { Dictionary } from "@/lib/i18n";
 
 type Props = {
+  dict: Dictionary;
   hovering: boolean;
   onHoverChange: (h: boolean) => void;
   onEnter: () => void;
@@ -12,9 +14,11 @@ type Props = {
 };
 
 export const SoftwarePanel = forwardRef<HTMLDivElement, Props>(function SoftwarePanel(
-  { hovering, onHoverChange, onEnter, scrollProgress, interactive },
+  { dict, hovering, onHoverChange, onEnter, scrollProgress, interactive },
   ref,
 ) {
+  const s = dict.identity.software;
+  const head = dict.identity;
   const warp = scrollProgress;
   const scaleTitle = 1 + warp * 2.2;
   const fadeChrome = 1 - Math.min(1, warp * 1.8);
@@ -106,11 +110,11 @@ export const SoftwarePanel = forwardRef<HTMLDivElement, Props>(function Software
           <div>
             <span style={{ color: "var(--sw-accent)" }}>01</span>
             <span style={{ margin: "0 10px", opacity: 0.4 }}>/</span>
-            <span>02 IDENTITIES</span>
+            <span>{head.statusLine}</span>
           </div>
           <div className="text-right leading-[1.8]">
             <div>
-              SYS.STATUS — ONLINE
+              {head.sysStatus}
               <span
                 className="ml-1.5 inline-block h-1.5 w-1.5 rounded-full align-middle"
                 style={{
@@ -120,7 +124,7 @@ export const SoftwarePanel = forwardRef<HTMLDivElement, Props>(function Software
                 }}
               />
             </div>
-            <div style={{ opacity: 0.6 }}>NODES · 142 &nbsp;·&nbsp; LAT 12ms</div>
+            <div style={{ opacity: 0.6 }}>{head.nodes}</div>
           </div>
         </header>
 
@@ -141,7 +145,7 @@ export const SoftwarePanel = forwardRef<HTMLDivElement, Props>(function Software
               marginBottom: 24,
             }}
           >
-            <span style={{ opacity: 0.5 }}>{"// "}</span>IDENTITY_01 · ENGINEERING
+            <span style={{ opacity: 0.5 }}>{"// "}</span>{s.badge}
           </div>
 
           <h1
@@ -155,7 +159,7 @@ export const SoftwarePanel = forwardRef<HTMLDivElement, Props>(function Software
               margin: 0,
             }}
           >
-            Software
+            {s.title1}
             <br />
             <em
               style={{
@@ -164,7 +168,7 @@ export const SoftwarePanel = forwardRef<HTMLDivElement, Props>(function Software
                 fontWeight: 300,
               }}
             >
-              Developer
+              {s.title2}
               <span style={{ color: "var(--sw-accent-2)", opacity: 0.7, fontWeight: 300 }}>.</span>
             </em>
           </h1>
@@ -179,17 +183,16 @@ export const SoftwarePanel = forwardRef<HTMLDivElement, Props>(function Software
               lineHeight: 1.6,
             }}
           >
-            <span style={{ color: "var(--sw-accent)" }}>&gt;</span> Systems, interfaces, and the
-            quiet craft of making them reliable.
+            <span style={{ color: "var(--sw-accent)" }}>&gt;</span> {s.line1}
             <br />
-            <span style={{ color: "var(--sw-accent)" }}>&gt;</span> Scroll to enter, or press{" "}
-            <b style={{ color: "var(--sw-accent-2)" }}>ENTER</b>.
+            <span style={{ color: "var(--sw-accent)" }}>&gt;</span> {s.line2Before}{" "}
+            <b style={{ color: "var(--sw-accent-2)" }}>ENTER</b>{s.line2After}
           </p>
 
           <button
             type="button"
             onClick={onEnter}
-            aria-label="Enter Software Developer portfolio"
+            aria-label={s.enterAria}
             className="sw-enter"
             style={{
               marginTop: 44,
@@ -210,11 +213,11 @@ export const SoftwarePanel = forwardRef<HTMLDivElement, Props>(function Software
           >
             <span className="sw-enter-inner">
               <span style={{ padding: "16px 24px" }}>
-                <span style={{ color: "var(--sw-mute)" }}>$</span>
+                <span style={{ color: "var(--sw-mute)" }}>{s.enterPrefix}</span>
                 <span style={{ color: "var(--sw-accent-2)", margin: "0 6px 0 10px" }}>
-                  ./enter
+                  {s.enterCmd}
                 </span>
-                <span>—software</span>
+                <span>{s.enterArg}</span>
               </span>
               <span className="sw-enter-arrow">
                 <svg width="16" height="12" viewBox="0 0 16 12" fill="none">
@@ -258,7 +261,7 @@ export const SoftwarePanel = forwardRef<HTMLDivElement, Props>(function Software
               opacity: 0.7,
             }}
           >
-            UPTIME
+            {s.statsUptime}
           </b>
           99.98%
           <span className="sw-stats-bar" style={{ "--v": "99%" } as React.CSSProperties} />
@@ -275,7 +278,7 @@ export const SoftwarePanel = forwardRef<HTMLDivElement, Props>(function Software
               opacity: 0.7,
             }}
           >
-            COMMITS/WK
+            {s.statsCommits}
           </b>
           84
           <span className="sw-stats-bar" style={{ "--v": "72%" } as React.CSSProperties} />
@@ -292,9 +295,9 @@ export const SoftwarePanel = forwardRef<HTMLDivElement, Props>(function Software
               opacity: 0.7,
             }}
           >
-            FOCUS
+            {s.statsFocus}
           </b>
-          DEEP
+          {s.statsFocusValue}
           <span className="sw-stats-bar" style={{ "--v": "88%" } as React.CSSProperties} />
         </div>
       </div>

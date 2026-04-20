@@ -2,8 +2,10 @@
 
 import { forwardRef } from "react";
 import { GameScene } from "@/components/canvas/GameScene";
+import type { Dictionary } from "@/lib/i18n";
 
 type Props = {
+  dict: Dictionary;
   hovering: boolean;
   onHoverChange: (h: boolean) => void;
   onEnter: () => void;
@@ -12,9 +14,11 @@ type Props = {
 };
 
 export const GamedevPanel = forwardRef<HTMLDivElement, Props>(function GamedevPanel(
-  { hovering, onHoverChange, onEnter, scrollProgress, interactive },
+  { dict, hovering, onHoverChange, onEnter, scrollProgress, interactive },
   ref,
 ) {
+  const g = dict.identity.gamedev;
+  const gd = dict.gamedev;
   const warp = scrollProgress;
   const pipeScale = 1 + warp * 0.8;
   const chromeFade = 1 - Math.min(1, warp * 1.6);
@@ -95,7 +99,7 @@ export const GamedevPanel = forwardRef<HTMLDivElement, Props>(function GamedevPa
           }}
         >
           <div style={{ color: "var(--gd-accent-3)", letterSpacing: 4 }}>♥ ♥ ♥ ♡ ♡</div>
-          <div>WORLD 2-1</div>
+          <div>{g.worldLabel}</div>
           <div style={{ color: "var(--gd-accent)" }}>
             <span style={{ color: "#fff7dc" }}>◉</span> × 0042
           </div>
@@ -113,7 +117,7 @@ export const GamedevPanel = forwardRef<HTMLDivElement, Props>(function GamedevPa
               animation: "gdBob 2.2s ease-in-out infinite",
             }}
           >
-            &gt; PLAYER 02 &lt;
+            {gd.player}
           </div>
 
           <h1
@@ -129,11 +133,11 @@ export const GamedevPanel = forwardRef<HTMLDivElement, Props>(function GamedevPa
                 "4px 4px 0 var(--gd-accent-3), 8px 8px 0 #3a0f5e, 12px 12px 0 rgba(0,0,0,0.3)",
             }}
           >
-            GAME
+            {g.title1}
             <br />
-            <span style={{ color: "var(--gd-accent)" }}>DEV</span>
+            <span style={{ color: "var(--gd-accent)" }}>{g.title2}</span>
             <br />
-            WORLD
+            {g.title3}
           </h1>
 
           <div
@@ -145,7 +149,7 @@ export const GamedevPanel = forwardRef<HTMLDivElement, Props>(function GamedevPa
               textShadow: "2px 2px 0 rgba(0,0,0,0.35)",
             }}
           >
-            A COLORFUL WORLD OF TINY MACHINES{" "}
+            {g.tagline}{" "}
             <span style={{ animation: "gdBlink 0.9s steps(2) infinite" }}>▮</span>
           </div>
 
@@ -169,7 +173,7 @@ export const GamedevPanel = forwardRef<HTMLDivElement, Props>(function GamedevPa
             }}
           >
             <span className="gd-start-body">
-              ▶ PRESS START
+              {g.start}
               <span
                 style={{
                   display: "inline-block",

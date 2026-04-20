@@ -1,7 +1,8 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
+import type { Dictionary, Locale } from "@/lib/i18n";
 import { SoftwarePanel } from "./SoftwarePanel";
 import { GamedevPanel } from "./GamedevPanel";
 import { IdentityNav } from "./IdentityNav";
@@ -11,12 +12,9 @@ import { GamedevCursor } from "./cursors/GamedevCursor";
 import { useMouse } from "./cursors/useMouse";
 import { useWheelProgress } from "@/lib/useWheelProgress";
 
-const IDENTITIES = [
-  { key: "software" as const, label: "Software Developer", route: "/software" },
-  { key: "gamedev" as const, label: "Game Developer", route: "/gamedev" },
-];
+type Props = { dict: Dictionary; locale: Locale };
 
-export function IdentityStage() {
+export function IdentityStage({ dict, locale }: Props) {
   const router = useRouter();
   const [activeIdx, setActiveIdx] = useState(0);
   const [swHover, setSwHover] = useState(false);
@@ -29,6 +27,22 @@ export function IdentityStage() {
   const swMouse = useMouse(swRef);
   const gdMouse = useMouse(gdRef);
 
+  const identities = useMemo(
+    () => [
+      {
+        key: "software" as const,
+        label: dict.identity.panelLabels.software,
+        route: `/${locale}/software`,
+      },
+      {
+        key: "gamedev" as const,
+        label: dict.identity.panelLabels.gamedev,
+        route: `/${locale}/gamedev`,
+      },
+    ],
+    [dict, locale],
+  );
+
   const navigateTo = useCallback(
     (route: string) => {
       setNavigating(true);
@@ -37,7 +51,7 @@ export function IdentityStage() {
     [router],
   );
 
-  const activeRoute = IDENTITIES[activeIdx].route;
+  const activeRoute = identities[activeIdx].route;
   const onComplete = useCallback(() => {
     navigateTo(activeRoute);
   }, [activeRoute, navigateTo]);
@@ -51,7 +65,7 @@ export function IdentityStage() {
     const onKey = (e: KeyboardEvent) => {
       if (transitioning || navigating) return;
       if (e.key === "ArrowRight") {
-        setActiveIdx((i) => Math.min(IDENTITIES.length - 1, i + 1));
+        setActiveIdx((i) => Math.min(identities.length - 1, i + 1));
         reset();
       } else if (e.key === "ArrowLeft") {
         setActiveIdx((i) => Math.max(0, i - 1));
@@ -63,21 +77,21 @@ export function IdentityStage() {
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [transitioning, navigating, triggerEnter, reset]);
+  }, [transitioning, navigating, triggerEnter, reset, identities.length]);
 
   const switchTo = useCallback(
     (idx: number) => {
-      if (idx < 0 || idx >= IDENTITIES.length) return;
+      if (idx < 0 || idx >= identities.length) return;
       if (idx === activeIdx || transitioning) return;
       setTransitioning(true);
       reset();
       setActiveIdx(idx);
       window.setTimeout(() => setTransitioning(false), 900);
     },
-    [activeIdx, transitioning, reset],
+    [activeIdx, transitioning, reset, identities.length],
   );
 
-  const isSoftware = IDENTITIES[activeIdx].key === "software";
+  const isSoftware = identities[activeIdx].key === "software";
   const chromeOpacity = Math.max(0, 1 - progress * 2);
 
   return (
@@ -86,6 +100,7 @@ export function IdentityStage() {
         <div className="absolute top-0 h-full" style={{ left: 0, width: "100vw" }}>
           <SoftwarePanel
             ref={swRef}
+            dict={dict}
             hovering={swHover && activeIdx === 0}
             onHoverChange={setSwHover}
             onEnter={triggerEnter}
@@ -96,6 +111,7 @@ export function IdentityStage() {
         <div className="absolute top-0 h-full" style={{ left: "100vw", width: "100vw" }}>
           <GamedevPanel
             ref={gdRef}
+            dict={dict}
             hovering={gdHover && activeIdx === 1}
             onHoverChange={setGdHover}
             onEnter={triggerEnter}
@@ -109,7 +125,7 @@ export function IdentityStage() {
       {activeIdx === 1 && <GamedevCursor pos={gdMouse} hovering={gdHover} />}
 
       <IdentityNav
-        identities={IDENTITIES.map(({ key, label }) => ({ key, label }))}
+        identities={identities.map(({ key, label }) => ({ key, label }))}
         activeIdx={activeIdx}
         onSwitch={switchTo}
         opacity={chromeOpacity}
