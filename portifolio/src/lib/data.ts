@@ -96,15 +96,15 @@ export const PORTFOLIO: PortfolioData = {
   techStack: [
     { name: "Next.js", cat: "Frontend", level: 90 },
     { name: "TypeScript", cat: "Core Language", level: 94 },
-    { name: "React", cat: "Frontend", level: 90 },
+    { name: "Golang", cat: "Backend · DDD", level: 78 },
     { name: "Docker", cat: "Infrastructure", level: 88 },
     { name: "Node.js", cat: "Backend", level: 90 },
-    { name: "Golang", cat: "Backend · DDD", level: 78 },
+    { name: "React", cat: "Frontend", level: 90 },
     { name: "Python", cat: "Tooling · ML", level: 74 },
-    { name: "React Native", cat: "Mobile", level: 82 },
     { name: "PostgreSQL", cat: "Databases", level: 82 },
     { name: "Nginx", cat: "Infrastructure", level: 80 },
     { name: "Git", cat: "Tooling", level: 92 },
+    { name: "React Native", cat: "Mobile", level: 82 },
   ],
 
   experience: [
