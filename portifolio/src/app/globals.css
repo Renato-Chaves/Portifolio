@@ -115,6 +115,34 @@ body {
   transform-origin: center;
 }
 
+/* ---------- SW warp: hyperspace starfield ---------- */
+.sw-starfield {
+  background-image:
+    radial-gradient(1px 1px at 13% 17%, rgba(255,255,255,0.95), transparent 55%),
+    radial-gradient(1.5px 1.5px at 28% 42%, rgba(170,220,255,0.9), transparent 55%),
+    radial-gradient(1px 1px at 47% 8%, rgba(255,255,255,0.85), transparent 55%),
+    radial-gradient(1px 1px at 62% 31%, rgba(230,250,255,0.9), transparent 55%),
+    radial-gradient(2px 2px at 74% 54%, rgba(130,200,255,0.9), transparent 55%),
+    radial-gradient(1px 1px at 88% 12%, rgba(255,255,255,0.9), transparent 55%),
+    radial-gradient(1.5px 1.5px at 9% 67%, rgba(170,230,255,0.85), transparent 55%),
+    radial-gradient(1px 1px at 33% 79%, rgba(255,255,255,0.9), transparent 55%),
+    radial-gradient(1.5px 1.5px at 51% 92%, rgba(180,240,255,0.9), transparent 55%),
+    radial-gradient(1px 1px at 69% 71%, rgba(255,255,255,0.95), transparent 55%),
+    radial-gradient(2px 2px at 82% 88%, rgba(110,240,232,0.8), transparent 55%),
+    radial-gradient(1px 1px at 4% 38%, rgba(255,255,255,0.9), transparent 55%),
+    radial-gradient(1.5px 1.5px at 19% 53%, rgba(200,230,255,0.85), transparent 55%),
+    radial-gradient(1px 1px at 40% 61%, rgba(255,255,255,0.95), transparent 55%),
+    radial-gradient(1px 1px at 57% 49%, rgba(190,220,255,0.75), transparent 55%),
+    radial-gradient(1.5px 1.5px at 92% 43%, rgba(255,255,255,0.9), transparent 55%),
+    radial-gradient(1px 1px at 23% 23%, rgba(255,255,255,0.8), transparent 55%),
+    radial-gradient(1px 1px at 66% 17%, rgba(180,220,255,0.75), transparent 55%),
+    radial-gradient(1.5px 1.5px at 77% 74%, rgba(255,255,255,0.85), transparent 55%),
+    radial-gradient(1px 1px at 11% 84%, rgba(200,240,255,0.85), transparent 55%);
+  background-repeat: no-repeat;
+  transform-origin: 50% 50%;
+  will-change: transform, opacity, filter;
+}
+
 /* ---------- SW scroll indicator ---------- */
 .sw-scroll-track {
   width: 1px;

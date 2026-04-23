@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 
-const DIVE_AMOUNT = 1400;
+const DIVE_AMOUNT = 2500;
 const TOUCH_MULTIPLIER = 2.5;
 const DRIFT_IDLE_MS = 180;
 const DRIFT_STEP = 40;
@@ -48,7 +48,7 @@ export function useWheelProgress({
     firedRef.current = true;
     const start = performance.now();
     const from = progressRef.current;
-    const duration = 900;
+    const duration = 1600;
     const step = (now: number) => {
       const t = Math.min(1, (now - start) / duration);
       const eased = from + (1 - from) * (t * t * t);

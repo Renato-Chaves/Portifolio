@@ -57,27 +57,71 @@ export const SoftwarePanel = forwardRef<HTMLDivElement, Props>(function Software
         <SoftwareNetwork intensity={hovering ? 2.2 : 1} />
       </div>
 
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0"
-        style={{
-          background: `radial-gradient(circle at 50% 50%, transparent ${40 - warp * 35}%, rgba(103,180,255,${warp * 0.3}) ${70 - warp * 30}%, transparent 100%)`,
-          opacity: warp,
-        }}
-      />
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0"
-        style={{
-          backgroundImage: `repeating-conic-gradient(from 0deg at 50% 50%,
-            transparent 0deg, transparent 1deg,
-            rgba(103,180,255,${0.15 + warp * 0.25}) 1deg, rgba(103,180,255,${0.15 + warp * 0.25}) 1.5deg,
-            transparent 1.5deg 5deg)`,
-          transform: `scale(${1 + warp * 4}) rotate(${warp * 15}deg)`,
-          opacity: warp * 0.9,
-          mixBlendMode: "screen",
-        }}
-      />
+      {warp > 0 && (
+        <>
+          <div
+            aria-hidden
+            className="sw-starfield pointer-events-none absolute inset-0"
+            style={{
+              transform: `scale(${1 + warp * 16})`,
+              opacity: Math.min(1, warp * 1.5),
+              filter: `blur(${warp * 1.2}px)`,
+              mixBlendMode: "screen",
+            }}
+          />
+
+          <div
+            aria-hidden
+            className="pointer-events-none absolute inset-0"
+            style={{
+              backgroundImage: `repeating-conic-gradient(from ${warp * 6}deg at 50% 50%,
+                transparent 0deg, transparent 1.4deg,
+                rgba(103,180,255,0.55) 1.4deg, rgba(103,180,255,0.55) 1.65deg,
+                transparent 1.65deg 3.2deg)`,
+              transform: `scale(${1 + warp * 6})`,
+              opacity: warp * 0.75,
+              mixBlendMode: "screen",
+              maskImage:
+                "radial-gradient(circle, transparent 0%, black 35%, black 85%, transparent 100%)",
+              WebkitMaskImage:
+                "radial-gradient(circle, transparent 0%, black 35%, black 85%, transparent 100%)",
+            }}
+          />
+
+          <div
+            aria-hidden
+            className="pointer-events-none absolute inset-0"
+            style={{
+              backgroundImage: `repeating-conic-gradient(from ${-warp * 14}deg at 50% 50%,
+                transparent 0deg, transparent 4.2deg,
+                rgba(200,235,255,${0.75 + warp * 0.25}) 4.2deg, rgba(200,235,255,${0.75 + warp * 0.25}) 4.75deg,
+                transparent 4.75deg 11deg)`,
+              transform: `scale(${1 + warp * 13})`,
+              opacity: warp,
+              mixBlendMode: "screen",
+              maskImage:
+                "radial-gradient(circle, transparent 8%, black 55%, transparent 100%)",
+              WebkitMaskImage:
+                "radial-gradient(circle, transparent 8%, black 55%, transparent 100%)",
+              filter: `blur(${warp * 2}px)`,
+            }}
+          />
+
+          <div
+            aria-hidden
+            className="pointer-events-none absolute inset-0"
+            style={{
+              background: `radial-gradient(circle at 50% 50%,
+                rgba(255,255,255,${warp * 0.9}) 0%,
+                rgba(110,240,232,${warp * 0.55}) ${8 + warp * 12}%,
+                rgba(103,180,255,${warp * 0.3}) ${28 + warp * 18}%,
+                transparent ${58 + warp * 15}%)`,
+              opacity: warp,
+              mixBlendMode: "screen",
+            }}
+          />
+        </>
+      )}
 
       {/* Corner brackets */}
       <div className="pointer-events-none absolute inset-[28px]" style={{ opacity: fadeChrome }}>
@@ -157,6 +201,10 @@ export const SoftwarePanel = forwardRef<HTMLDivElement, Props>(function Software
               letterSpacing: "-0.04em",
               color: "var(--sw-ink)",
               margin: 0,
+              filter:
+                warp > 0
+                  ? `drop-shadow(-${warp * 4}px 0 rgba(255,90,140,${warp * 0.55})) drop-shadow(${warp * 4}px 0 rgba(110,240,232,${warp * 0.7}))`
+                  : undefined,
             }}
           >
             {s.title1}
@@ -340,6 +388,51 @@ export const SoftwarePanel = forwardRef<HTMLDivElement, Props>(function Software
           {"}"};
         </div>
       </div>
+
+      {warp > 0.42 && (
+        <div
+          aria-hidden
+          className="pointer-events-none absolute"
+          style={{
+            bottom: "22%",
+            left: "50%",
+            transform: `translateX(-50%) scale(${1 + warp * 0.25})`,
+            fontFamily: "var(--font-jetbrains-mono), monospace",
+            fontSize: 12,
+            letterSpacing: "0.22em",
+            textTransform: "uppercase",
+            color: "var(--sw-accent-2)",
+            opacity: Math.min(1, (warp - 0.42) * 3.5),
+            textShadow: "0 0 10px rgba(110,240,232,0.7)",
+            whiteSpace: "nowrap",
+          }}
+        >
+          <span style={{ opacity: 0.55, color: "var(--sw-mute)", marginRight: 8 }}>&gt;</span>
+          warp.init<span style={{ color: "var(--sw-accent)" }}>()</span>
+          <span
+            style={{
+              display: "inline-block",
+              width: 7,
+              height: 13,
+              background: "var(--sw-accent-2)",
+              marginLeft: 8,
+              verticalAlign: "-2px",
+              animation: "swBlink 0.6s infinite",
+            }}
+          />
+        </div>
+      )}
+
+      {warp > 0.82 && (
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0"
+          style={{
+            background: "white",
+            opacity: Math.min(1, (warp - 0.82) * 5.5),
+          }}
+        />
+      )}
     </div>
   );
 });
