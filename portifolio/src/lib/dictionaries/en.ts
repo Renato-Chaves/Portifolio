@@ -42,6 +42,65 @@ export const en = {
     body1: "THE GAME DEVELOPER PORTFOLIO IS UNDER CONSTRUCTION.",
     body2Prefix: "CHECK BACK SOON FOR TINY MACHINES",
     back: "◀ PRESS B · BACK",
+
+    hero: {
+      title1: "GAME",
+      title2: "DEV",
+      title3: "WORLD",
+      tagline: "PIXELS · WORLDS · TINY MACHINES",
+      scrollHint: "SCROLL TO DRIFT",
+    },
+
+    portalHub: {
+      sectionLabel: "GAMES SHOWCASE",
+      clickToEnter: "CLICK TO ENTER",
+      placeholderName: "???",
+      placeholderHint: "COMING SOON",
+      sealedHint: "INSERT COIN",
+      closeLabel: "Close",
+      backLabel: "Back",
+      playGame: "▶ PLAY GAME",
+      visitItch: "ITCH.IO",
+      visitGamejolt: "GAMEJOLT",
+      watchTrailer: "TRAILER",
+      engineLabel: "ENGINE",
+      jamLabel: "GAME JAM",
+      tagsLabel: "TAGS",
+      noDescription: "More details coming soon.",
+    },
+
+    quests: {
+      hero: { title: "QUEST STARTED · INTRO", body: "Drift through the cosmos" },
+      about: { title: "QUEST STARTED · ABOUT", body: "Step into the studio" },
+      engines: {
+        title: "QUEST STARTED · ENGINES & TOOLS",
+        body: "Examine the tools on display",
+      },
+      jams: {
+        title: "QUEST STARTED · GAME JAMS",
+        body: "Inspect the trophy hall",
+      },
+      showcase: {
+        title: "QUEST STARTED · SHOWCASE",
+        body: "Choose a portal and step through",
+      },
+      contact: {
+        title: "QUEST STARTED · CONTACT",
+        body: "Find the bonfire",
+      },
+    },
+
+    minimap: {
+      label: "MAP",
+      sections: {
+        hero: "Cosmos",
+        about: "Studio",
+        engines: "Tools",
+        jams: "Trophies",
+        showcase: "Portals",
+        contact: "Bonfire",
+      },
+    },
   },
 
   nav: {

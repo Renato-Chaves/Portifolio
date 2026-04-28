@@ -44,6 +44,71 @@ export const pt: Dictionary = {
     body1: "O PORTFÓLIO DE DESENVOLVIMENTO DE JOGOS ESTÁ EM CONSTRUÇÃO.",
     body2Prefix: "VOLTE EM BREVE PARA VER MÁQUINAS MINIATURAS",
     back: "◀ PRESSIONE B · VOLTAR",
+
+    hero: {
+      title1: "GAME",
+      title2: "DEV",
+      title3: "WORLD",
+      tagline: "PIXELS · MUNDOS · MÁQUINAS MINIATURAS",
+      scrollHint: "ROLE PARA NAVEGAR",
+    },
+
+    portalHub: {
+      sectionLabel: "VITRINE DE JOGOS",
+      clickToEnter: "CLIQUE PARA ENTRAR",
+      placeholderName: "???",
+      placeholderHint: "EM BREVE",
+      sealedHint: "INSIRA UMA FICHA",
+      closeLabel: "Fechar",
+      backLabel: "Voltar",
+      playGame: "▶ JOGAR",
+      visitItch: "ITCH.IO",
+      visitGamejolt: "GAMEJOLT",
+      watchTrailer: "TRAILER",
+      engineLabel: "ENGINE",
+      jamLabel: "GAME JAM",
+      tagsLabel: "TAGS",
+      noDescription: "Mais detalhes em breve.",
+    },
+
+    quests: {
+      hero: {
+        title: "MISSÃO INICIADA · INTRO",
+        body: "Navegue pelo cosmos",
+      },
+      about: {
+        title: "MISSÃO INICIADA · SOBRE",
+        body: "Entre no estúdio",
+      },
+      engines: {
+        title: "MISSÃO INICIADA · ENGINES & FERRAMENTAS",
+        body: "Examine as ferramentas em exibição",
+      },
+      jams: {
+        title: "MISSÃO INICIADA · GAME JAMS",
+        body: "Inspecione o salão de troféus",
+      },
+      showcase: {
+        title: "MISSÃO INICIADA · VITRINE",
+        body: "Escolha um portal e atravesse",
+      },
+      contact: {
+        title: "MISSÃO INICIADA · CONTATO",
+        body: "Encontre a fogueira",
+      },
+    },
+
+    minimap: {
+      label: "MAPA",
+      sections: {
+        hero: "Cosmos",
+        about: "Estúdio",
+        engines: "Ferramentas",
+        jams: "Troféus",
+        showcase: "Portais",
+        contact: "Fogueira",
+      },
+    },
   },
 
   nav: {

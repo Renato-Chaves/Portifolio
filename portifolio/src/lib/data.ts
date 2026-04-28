@@ -63,6 +63,54 @@ export type Cert = { name: string; issuer: string };
 
 export type Social = { k: string; v: string; href: string; external: boolean };
 
+export type GameEngine =
+  | "Construct 2"
+  | "Clickteam Fusion 2.5"
+  | "Unity 2D"
+  | "Unity 3D";
+
+export type PortalFrameStyle =
+  | "stone-arch"
+  | "tech-ring"
+  | "wooden-door"
+  | "mystic-gate"
+  | "sealed";
+
+export type AmbientParticle =
+  | "coins"
+  | "sparkles"
+  | "leaves"
+  | "embers"
+  | "dust";
+
+export type GameJamEntry = {
+  name: string;
+  year: number;
+  placement?: string;
+};
+
+export type GameProject = {
+  name: string;
+  slug: string;
+  status: "shipped" | "wip" | "placeholder";
+  // visual identity
+  logoSrc?: string;
+  characterSrc?: string;
+  frameStyle: PortalFrameStyle;
+  palette: { primary: string; accent: string; bg: string };
+  ambient: AmbientParticle;
+  // takeover content
+  description?: string;
+  screenshots: string[];
+  engine?: GameEngine;
+  gameJam?: GameJamEntry;
+  tags: string[];
+  itchUrl?: string;
+  gamejoltUrl?: string;
+  htmlEmbedUrl?: string;
+  trailerUrl?: string;
+};
+
 export type PortfolioData = {
   name: string;
   handle: string;
@@ -83,6 +131,7 @@ export type PortfolioData = {
   education: Education[];
   certs: Cert[];
   socials: Social[];
+  gameProjects: GameProject[];
 };
 
 export const PORTFOLIO: PortfolioData = {
@@ -334,6 +383,49 @@ export const PORTFOLIO: PortfolioData = {
       v: "renatochaves.dev@gmail.com",
       href: "mailto:renatochaves.dev@gmail.com",
       external: false,
+    },
+  ],
+
+  gameProjects: [
+    {
+      name: "TBD",
+      slug: "real-game",
+      status: "shipped",
+      frameStyle: "stone-arch",
+      palette: { primary: "#ffd23f", accent: "#5cffb7", bg: "#3a0f5e" },
+      ambient: "sparkles",
+      screenshots: [],
+      tags: [],
+    },
+    {
+      name: "???",
+      slug: "placeholder-1",
+      status: "placeholder",
+      frameStyle: "sealed",
+      palette: { primary: "#67b4ff", accent: "#c48eff", bg: "#1a1a3a" },
+      ambient: "dust",
+      screenshots: [],
+      tags: [],
+    },
+    {
+      name: "???",
+      slug: "placeholder-2",
+      status: "placeholder",
+      frameStyle: "sealed",
+      palette: { primary: "#ff6b9e", accent: "#ffd23f", bg: "#2a0a48" },
+      ambient: "dust",
+      screenshots: [],
+      tags: [],
+    },
+    {
+      name: "???",
+      slug: "placeholder-3",
+      status: "placeholder",
+      frameStyle: "sealed",
+      palette: { primary: "#5cffb7", accent: "#67b4ff", bg: "#0e2c2c" },
+      ambient: "dust",
+      screenshots: [],
+      tags: [],
     },
   ],
 };
