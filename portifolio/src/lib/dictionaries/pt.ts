@@ -167,7 +167,6 @@ export const pt: Dictionary = {
       sectionLabel: "PÔR-DO-SOL · ACAMPAMENTO",
       title: "AO REDOR DA FOGUEIRA",
       blurb: "De passagem? Mande uma mensagem — ou siga a fumaça.",
-      endingLine: "VOCÊ CHEGOU À BEIRA DO MUNDO",
       signposts: {
         itch: "ITCH.IO",
         gamejolt: "GAMEJOLT",

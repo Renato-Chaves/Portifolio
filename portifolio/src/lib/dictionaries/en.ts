@@ -159,7 +159,6 @@ export const en = {
       sectionLabel: "SUNSET · CAMP",
       title: "AROUND THE BONFIRE",
       blurb: "Wandering through? Drop a message — or follow the smoke.",
-      endingLine: "YOU MADE IT TO THE EDGE OF THE WORLD",
       signposts: {
         itch: "ITCH.IO",
         gamejolt: "GAMEJOLT",

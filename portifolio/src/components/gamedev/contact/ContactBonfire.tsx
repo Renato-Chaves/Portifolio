@@ -89,7 +89,8 @@ export function ContactBonfire({
       style={{
         position: "relative",
         width: "100%",
-        minHeight: "100vh",
+        minHeight: "100dvh",
+        boxSizing: "border-box",
         padding: "128px 24px 90px",
         background:
           "linear-gradient(180deg, #050018 0%, #090421 14%, #170735 32%, #321041 54%, #6e214d 74%, #150727 100%)",
@@ -171,8 +172,8 @@ export function ContactBonfire({
             "radial-gradient(circle, transparent 0 46%, rgba(92,255,183,0.95) 47% 49%, rgba(103,180,255,0.45) 50% 54%, transparent 56%), conic-gradient(from 20deg, transparent 0 11%, rgba(92,255,183,0.34) 12% 15%, transparent 16% 26%, rgba(255,210,63,0.28) 27% 30%, transparent 31% 44%, rgba(103,180,255,0.34) 45% 48%, transparent 49% 64%, rgba(255,107,158,0.28) 65% 68%, transparent 69% 100%)",
           boxShadow:
             "0 0 70px rgba(92,255,183,0.32), inset 0 0 42px rgba(103,180,255,0.18)",
-          animation: "gdSunPulse 5s ease-in-out infinite",
-          opacity: 0.75,
+          animation: "gdContactHaloPulse 5s ease-in-out infinite",
+          opacity: 0.1,
           pointerEvents: "none",
         }}
       />
@@ -528,27 +529,6 @@ export function ContactBonfire({
             }}
           >
             {dict.gamedev.contact.blurb}
-          </div>
-          <div
-            style={{
-              justifySelf: "center",
-              maxWidth: "min(100%, 680px)",
-              padding: "8px 12px",
-              background: "rgba(5,0,24,0.62)",
-              border: "2px solid rgba(92,255,183,0.52)",
-              boxShadow:
-                "3px 3px 0 rgba(0,0,0,0.42), inset 0 0 0 1px rgba(255,247,220,0.12)",
-              fontFamily: "var(--font-press-start), monospace",
-              fontSize: 9,
-              letterSpacing: 3,
-              lineHeight: 1.6,
-              color: "#5cffb7",
-              textShadow: "0 0 12px rgba(92,255,183,0.42)",
-              textAlign: "center",
-              overflowWrap: "anywhere",
-            }}
-          >
-            {dict.gamedev.contact.endingLine}
           </div>
         </header>
 
