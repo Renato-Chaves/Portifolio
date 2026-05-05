@@ -89,6 +89,19 @@ export type GameJamEntry = {
   placement?: string;
 };
 
+export type GameJam = {
+  slug: string;
+  name: string;
+  year: number;
+  theme?: string;
+  placement?: string;
+  entry: {
+    name: string;
+    thumbnail?: string;
+    url?: string;
+  };
+};
+
 export type GameProject = {
   name: string;
   slug: string;
@@ -132,6 +145,7 @@ export type PortfolioData = {
   certs: Cert[];
   socials: Social[];
   gameProjects: GameProject[];
+  gameJams: GameJam[];
 };
 
 export const PORTFOLIO: PortfolioData = {
@@ -388,18 +402,72 @@ export const PORTFOLIO: PortfolioData = {
 
   gameProjects: [
     {
-      name: "TBD",
-      slug: "real-game",
+      name: "Restoration Frontier",
+      slug: "restoration-frontier",
+      status: "shipped",
+      frameStyle: "tech-ring",
+      palette: { primary: "#5cffb7", accent: "#67b4ff", bg: "#0e2030" },
+      ambient: "sparkles",
+      description:
+        "A cooperative multiplayer game where a team of robots cleans pollution from a planet. Collect scrap, bring it to recycling stations to build automation machines, destroy pollution sources, and ultimately reach and demolish a mega-factory. Pollution clouds block vision, resources gate progression, and the map opens up as the world is restored.",
+      screenshots: [
+        "/gamedev/RestorationFrontier_Menu.png",
+        "/gamedev/RestorationFrontier_1.png",
+        "/gamedev/RestorationFrontier_2.png",
+        "/gamedev/RestorationFrontier_3.png",
+        "/gamedev/RestorationFrontier_4.png",
+        "/gamedev/RestorationFrontier_5.png",
+        "/gamedev/RestorationFrontier_6.png",
+      ],
+      engine: "Unity 3D",
+      tags: ["3D", "Multiplayer", "Co-op", "Sci-Fi"],
+      // TODO: paste links when ready
+      // trailerUrl: "https://www.youtube.com/...",
+    },
+    {
+      name: "Rushing to the Top",
+      slug: "rushing-to-the-top",
       status: "shipped",
       frameStyle: "stone-arch",
-      palette: { primary: "#ffd23f", accent: "#5cffb7", bg: "#3a0f5e" },
+      palette: { primary: "#ffd23f", accent: "#ff6b9e", bg: "#2a1015" },
+      ambient: "embers",
+      description:
+        "A roguelite 2D shooter. The ocean is rising — survive by climbing to the top of a building. Buy and upgrade guns between runs, shoot enemies floor by floor, and fix elevators to keep ascending. Linger too long on a floor and the rising water catches you.",
+      screenshots: [
+        "/gamedev/RushingToTheTopMenu.png",
+        "/gamedev/RushingToTheTop_1.jpg",
+        "/gamedev/RushingToTheTop_2.jpg",
+        "/gamedev/RushingToTheTop_3.jpg",
+        "/gamedev/RushingToTheTop_4.jpg",
+      ],
+      engine: "Unity 2D",
+      gameJam: { name: "GameJaaj 5", year: 2021, placement: "Theme: Torres" },
+      tags: ["2D", "Roguelite", "Shooter", "Pixel"],
+      // TODO: gamejoltUrl
+    },
+    {
+      name: "Plus and Minus",
+      slug: "plus-and-minus",
+      status: "shipped",
+      frameStyle: "mystic-gate",
+      palette: { primary: "#c48eff", accent: "#5cffb7", bg: "#2a0a48" },
       ambient: "sparkles",
-      screenshots: [],
-      tags: [],
+      description:
+        "A two-player physics game. It opens as a 1v1 fight in a ring — but hidden clues hint at how to escape your chains. Find them and the game shifts into a cooperative escape platformer where both players are physically tethered, forcing you to navigate together using physics.",
+      screenshots: [
+        "/gamedev/PlusAndMinusBackgroundBanner.png",
+        "/gamedev/PlusAndMinus_1.png",
+        "/gamedev/PlusAndMinus_2.png",
+        "/gamedev/PlusAndMinus_3.png",
+      ],
+      engine: "Unity 3D",
+      gameJam: { name: "Game Jam", year: 2021 },
+      tags: ["3D", "Local Co-op", "Physics", "Puzzle"],
+      // TODO: itchUrl
     },
     {
       name: "???",
-      slug: "placeholder-1",
+      slug: "more-coming",
       status: "placeholder",
       frameStyle: "sealed",
       palette: { primary: "#67b4ff", accent: "#c48eff", bg: "#1a1a3a" },
@@ -407,25 +475,45 @@ export const PORTFOLIO: PortfolioData = {
       screenshots: [],
       tags: [],
     },
+  ],
+
+  gameJams: [
     {
-      name: "???",
-      slug: "placeholder-2",
-      status: "placeholder",
-      frameStyle: "sealed",
-      palette: { primary: "#ff6b9e", accent: "#ffd23f", bg: "#2a0a48" },
-      ambient: "dust",
-      screenshots: [],
-      tags: [],
+      slug: "gamejaaj-5-2021",
+      name: "GameJaaj 5",
+      year: 2021,
+      theme: "Torres",
+      entry: {
+        name: "Rushing to the Top",
+        thumbnail: "/gamedev/RushingToTheTopMenu.png",
+      },
     },
     {
-      name: "???",
-      slug: "placeholder-3",
-      status: "placeholder",
-      frameStyle: "sealed",
-      palette: { primary: "#5cffb7", accent: "#67b4ff", bg: "#0e2c2c" },
-      ambient: "dust",
-      screenshots: [],
-      tags: [],
+      slug: "gmtk-21",
+      name: "GMTK Game Jam 2021",
+      year: 2021,
+      entry: {
+        name: "Plus and Minus",
+        thumbnail: "/gamedev/PlusAndMinusBackgroundBanner.png",
+        url: "https://itch.io/jam/gmtk-2021"
+      },
+    },
+    {
+      slug: "itch-game-jam-2020",
+      name: "Itch.io Game Jam",
+      year: 2020,
+      entry: {
+        name: "Looting in the Docks",
+        thumbnail: "/gamedev/LootingInTheDocks_Menu.png",
+      },
+    },
+    {
+      slug: "itch-weekend-jam-2019",
+      name: "Itch.io Weekend Jam",
+      year: 2019,
+      entry: {
+        name: "Marines Quest",
+      },
     },
   ],
 };

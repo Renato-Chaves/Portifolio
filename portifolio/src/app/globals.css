@@ -93,6 +93,64 @@ body {
   50% { transform: translateY(6px); }
 }
 
+@keyframes gdAmbientRise {
+  0% { transform: translateY(0); opacity: 0; }
+  10% { opacity: 0.9; }
+  100% { transform: translateY(-220px); opacity: 0; }
+}
+
+@keyframes gdFlameOuter {
+  0%, 100% { transform: translateX(-50%) scale(1, 1); opacity: 0.95; }
+  25% { transform: translateX(-50%) scale(1.06, 0.94); opacity: 0.85; }
+  50% { transform: translateX(-50%) scale(0.94, 1.06); opacity: 1; }
+  75% { transform: translateX(-50%) scale(1.03, 0.97); opacity: 0.9; }
+}
+
+@keyframes gdFlameMiddle {
+  0%, 100% { transform: translateX(-50%) scale(1, 1); }
+  20% { transform: translate(-52%, 0) scale(0.95, 1.07); }
+  50% { transform: translate(-48%, 0) scale(1.06, 0.94); }
+  80% { transform: translateX(-50%) scale(1.02, 1.02); }
+}
+
+@keyframes gdFlameCore {
+  0%, 100% { transform: translateX(-50%) scale(1); opacity: 1; }
+  30% { transform: translateX(-50%) scale(1.12); opacity: 0.85; }
+  60% { transform: translateX(-50%) scale(0.9); opacity: 1; }
+}
+
+@keyframes gdGlowPulse {
+  0%, 100% { opacity: 0.85; }
+  50% { opacity: 1; }
+}
+
+@keyframes gdStarStreak {
+  0%, 100% { opacity: 0; transform: scaleX(0.45); }
+  45% { opacity: 0.9; transform: scaleX(1); }
+}
+
+@keyframes gdBootScroll {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(var(--gd-boot-shift, -36px)); }
+}
+
+@keyframes gdCursorBlink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.gd-warp-streak { animation: gdStarStreak 1.6s linear infinite; will-change: transform, opacity; }
+.gd-warp-boot { animation: gdBootScroll 1.8s steps(6, end) infinite; will-change: transform; }
+.gd-warp-cursor { animation: gdCursorBlink 1s steps(2, end) infinite; }
+
+.gd-flame-outer { animation: gdFlameOuter 1.6s ease-in-out infinite; will-change: transform, opacity; }
+.gd-flame-middle { animation: gdFlameMiddle 0.95s ease-in-out infinite; will-change: transform; }
+.gd-flame-core { animation: gdFlameCore 0.62s ease-in-out infinite; will-change: transform, opacity; }
+
+@media (max-width: 880px) {
+  .gd-about-grid { grid-template-columns: 1fr !important; }
+}
+
 /* ---------- Shared stage slide ---------- */
 .identity-stage {
   position: absolute;
@@ -1471,4 +1529,10 @@ body {
     animation: none !important;
   }
   .sw-portfolio { scroll-behavior: auto; }
+
+  .gd-warp-streak,
+  .gd-warp-boot,
+  .gd-warp-cursor {
+    animation: none !important;
+  }
 }

@@ -109,6 +109,77 @@ export const pt: Dictionary = {
         contact: "Fogueira",
       },
     },
+
+    about: {
+      sectionLabel: "SALA DO ESTÚDIO",
+      title: "PERFIL DO JOGADOR",
+      intro: "Oi — sou o Renato. Faço jogos quando não estou fazendo software.",
+      paragraphs: [
+        "Meu primeiro jogo foi um plataforma 2D no Construct 2 — chefes, lojas, o pacote completo. Eu era um moleque tentando descobrir por que a engine ficava comendo meus saves. Uns anos e quatro engines depois, a resposta continua a mesma: 'porque esqueci de chamar o save.' Alguns bugs te acompanham para sempre.",
+        "A maior parte dos meus jogos sai de jams — o tipo de restrição que transforma uma ideia vaga em uma coisinha pronta em 48 horas. Adoro o formato. Solo no design e código, às vezes puxando um amigo pra arte quando o prazo aperta. Cada jogo tem o estilo dele porque cada jogo é um pequeno experimento próprio.",
+        "Hoje o foco é o Restoration Frontier — um jogo cooperativo multiplayer onde robôs limpam um planeta poluído. Vários fins-de-semana longos em Unity 3D. Netcode multiplayer te ensina humildade e eu recomendo a quem quer se sentir pequeno.",
+      ],
+      stats: {
+        class: { label: "CLASSE", value: "GAME DEV" },
+        level: { label: "LV", value: "12 ANOS" },
+        engines: { label: "ENGINES", value: "4 / 4" },
+        jams: { label: "JAMS", value: "4" },
+      },
+    },
+
+    engines: {
+      sectionLabel: "INVENTÁRIO · ENGINES",
+      title: "FERRAMENTAS DO OFÍCIO",
+      hint: "PASSE O MOUSE EM UM SLOT PARA INSPECIONAR",
+      shippedLabel: "ENTREGUES",
+      yearsLabel: "ANOS",
+      allGamesLabel: "TODOS OS JOGOS",
+      slots: {
+        "Construct 2": {
+          years: "2017",
+          blurb: "Onde tudo começou — um plataforma 2D com lojas e chefes.",
+        },
+        "Clickteam Fusion 2.5": {
+          years: "2019 — 2020",
+          blurb: "Engine de jam. Protótipo rápido, stealth top-down, builds de fim-de-semana.",
+        },
+        "Unity 2D": {
+          years: "2021",
+          blurb: "Shooter roguelite para a GameJaaj 5 — sobreviva à maré subindo.",
+        },
+        "Unity 3D": {
+          years: "2021 — 2024",
+          blurb: "Multiplayer, física, co-op — casa atual dos projetos maiores.",
+        },
+      },
+    },
+
+    jams: {
+      sectionLabel: "SALÃO DOS TROFÉUS · GAME JAMS",
+      title: "DIÁRIO DE MISSÕES",
+      themeLabel: "TEMA",
+      entryLabel: "JOGO",
+      hint: "CADA SELO É UMA RUN FINALIZADA",
+      viewEntry: "▶ VER PÁGINA DA JAM",
+    },
+
+    contact: {
+      sectionLabel: "PÔR-DO-SOL · ACAMPAMENTO",
+      title: "AO REDOR DA FOGUEIRA",
+      blurb: "De passagem? Mande uma mensagem — ou siga a fumaça.",
+      endingLine: "VOCÊ CHEGOU À BEIRA DO MUNDO",
+      signposts: {
+        itch: "ITCH.IO",
+        gamejolt: "GAMEJOLT",
+        steam: "STEAM",
+        email: "E-MAIL",
+      },
+      crossLabel: "IDENTIDADE PARALELA · 01",
+      crossTitle: "TAMBÉM CONSTRUINDO NO OUTRO MUNDO",
+      crossBlurb: "Sistemas silenciosos, interfaces cuidadas, ofício de produção.",
+      crossButton: "SALTAR PARA SOFTWARE",
+      footerNote: "FEITO COM PIXELS · INTENÇÃO",
+    },
   },
 
   nav: {

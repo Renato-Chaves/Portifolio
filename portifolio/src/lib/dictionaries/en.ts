@@ -56,7 +56,7 @@ export const en = {
       clickToEnter: "CLICK TO ENTER",
       placeholderName: "???",
       placeholderHint: "COMING SOON",
-      sealedHint: "INSERT COIN",
+      sealedHint: "WHAT'S NEXT?",
       closeLabel: "Close",
       backLabel: "Back",
       playGame: "▶ PLAY GAME",
@@ -100,6 +100,77 @@ export const en = {
         showcase: "Portals",
         contact: "Bonfire",
       },
+    },
+
+    about: {
+      sectionLabel: "STUDIO ROOM",
+      title: "PLAYER PROFILE",
+      intro: "Hey — I'm Renato. I make games when I'm not making software.",
+      paragraphs: [
+        "My very first game was a 2D platformer in Construct 2 — bosses, shops, the works. I was a kid trying to figure out why the engine kept eating my save files. A few years and four engines later, the answer is still 'because I forgot to call save.' Some bugs follow you forever.",
+        "Most of my games come out of jams — the kind of constraint that turns a vague idea into a tiny finished thing in 48 hours. I love the format. Solo on the design and code, occasionally pulling in a friend for art when the deadline gets mean. Each game has its own style because each game is its own little experiment.",
+        "Latest project was Restoration Frontier — a co-op multiplayer game where robots clean a polluted planet. Long stretch of weekends in Unity 3D. Multiplayer netcode is humbling and I'd recommend it to anyone who wants to feel small.",
+      ],
+      stats: {
+        class: { label: "CLASS", value: "GAME DEV" },
+        level: { label: "LV", value: "9 YRS" },
+        engines: { label: "ENGINE", value: "Unity" },
+        jams: { label: "JAMS", value: "4" },
+      },
+    },
+
+    engines: {
+      sectionLabel: "INVENTORY · ENGINES",
+      title: "TOOLS OF THE TRADE",
+      hint: "HOVER A SLOT TO INSPECT",
+      shippedLabel: "SHIPPED",
+      yearsLabel: "YEARS",
+      allGamesLabel: "ALL GAMES",
+      slots: {
+        "Construct 2": {
+          years: "2017",
+          blurb: "Where it all started — a 2D platformer with shops and bosses.",
+        },
+        "Clickteam Fusion 2.5": {
+          years: "2019 — 2020",
+          blurb: "Jam-time engine. Quick prototyping, top-down stealth, weekend builds.",
+        },
+        "Unity 2D": {
+          years: "2021",
+          blurb: "Roguelite shooter for GameJaaj 5 — survive the rising tide.",
+        },
+        "Unity 3D": {
+          years: "2021 — 2024",
+          blurb: "Multiplayer, physics, co-op — current home for the bigger projects.",
+        },
+      },
+    },
+
+    jams: {
+      sectionLabel: "TROPHY HALL · GAME JAMS",
+      title: "QUEST LOG",
+      themeLabel: "THEME",
+      entryLabel: "ENTRY",
+      hint: "EACH STAMP IS A FINISHED RUN",
+      viewEntry: "▶ VIEW JAM PAGE",
+    },
+
+    contact: {
+      sectionLabel: "SUNSET · CAMP",
+      title: "AROUND THE BONFIRE",
+      blurb: "Wandering through? Drop a message — or follow the smoke.",
+      endingLine: "YOU MADE IT TO THE EDGE OF THE WORLD",
+      signposts: {
+        itch: "ITCH.IO",
+        gamejolt: "GAMEJOLT",
+        steam: "STEAM",
+        email: "EMAIL",
+      },
+      crossLabel: "PARALLEL IDENTITY · 01",
+      crossTitle: "ALSO BUILDING IN THE OTHER WORLD",
+      crossBlurb: "Quiet systems, careful interfaces, production craft.",
+      crossButton: "WARP TO SOFTWARE",
+      footerNote: "BUILT WITH PIXELS · INTENT",
     },
   },
 

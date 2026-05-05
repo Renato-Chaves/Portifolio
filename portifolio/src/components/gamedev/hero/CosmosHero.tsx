@@ -1,7 +1,7 @@
 "use client";
 
-import { useMemo, useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { useEffect, useMemo, useRef } from "react";
+import { animate, motion, useMotionValue, useScroll, useTransform } from "framer-motion";
 import type { Dictionary } from "@/lib/i18n";
 import { useGdScroll } from "../GamedevScrollProvider";
 
@@ -16,7 +16,34 @@ export function CosmosHero({ dict }: Props) {
     offset: ["start start", "end start"],
   });
 
-  const continuityRadius = useTransform(scrollYProgress, [0, 0.05], [0, 1.6]);
+  // Drives the intro: auto-plays 0→0.2 on mount, then scroll takes over
+  const introProgress = useMotionValue(0);
+  const effectiveProgress = useMotionValue(0);
+
+  useEffect(() => {
+    if (reducedMotion) return;
+
+    const sync = () =>
+      effectiveProgress.set(
+        Math.max(introProgress.get(), Math.min(1, scrollYProgress.get() * 1.5)),
+      );
+
+    const unsubIntro = introProgress.on("change", sync);
+    const unsubScroll = scrollYProgress.on("change", sync);
+
+    const controls = animate(introProgress, 0.2, {
+      duration: 2.2,
+      ease: [0.16, 1, 0.3, 1],
+    });
+
+    return () => {
+      controls.stop();
+      unsubIntro();
+      unsubScroll();
+    };
+  }, [reducedMotion, introProgress, effectiveProgress, scrollYProgress]);
+
+  const continuityRadius = useTransform(effectiveProgress, [0, 0.05], [0, 1.6]);
   const continuityMask = useTransform(
     continuityRadius,
     (r) =>
@@ -28,41 +55,41 @@ export function CosmosHero({ dict }: Props) {
     [1, 0.35, 0],
   );
 
-  const star1Y = useTransform(scrollYProgress, [0, 1], [0, -150]);
-  const star2Y = useTransform(scrollYProgress, [0, 1], [0, -340]);
-  const star3Y = useTransform(scrollYProgress, [0, 1], [0, -640]);
-  const starsBlurAmt = useTransform(scrollYProgress, [0.3, 0.7], [0, 3]);
+  const star1Y = useTransform(effectiveProgress, [0, 1], [0, -150]);
+  const star2Y = useTransform(effectiveProgress, [0, 1], [0, -340]);
+  const star3Y = useTransform(effectiveProgress, [0, 1], [0, -640]);
+  const starsBlurAmt = useTransform(effectiveProgress, [0.3, 0.7], [0, 3]);
   const starsBlur = useTransform(starsBlurAmt, (b) => `blur(${b}px)`);
 
   const planetScale = useTransform(
-    scrollYProgress,
+    effectiveProgress,
     [0.1, 0.7, 0.95],
     [0.18, 1.4, 2.7],
   );
   const planetOpacity = useTransform(
-    scrollYProgress,
+    effectiveProgress,
     [0.05, 0.2, 0.92, 1],
     [0, 1, 1, 0.5],
   );
 
   const titleOpacity = useTransform(
-    scrollYProgress,
+    effectiveProgress,
     [0.05, 0.2, 0.6, 0.78],
     [0, 1, 1, 0],
   );
-  const titleY = useTransform(scrollYProgress, [0.05, 0.2], [30, 0]);
+  const titleY = useTransform(effectiveProgress, [0.05, 0.2], [30, 0]);
 
-  const hue = useTransform(scrollYProgress, [0.7, 0.95], [0, 35]);
-  const bright = useTransform(scrollYProgress, [0.7, 0.95], [1, 0.7]);
-  const sat = useTransform(scrollYProgress, [0.7, 0.95], [1, 1.35]);
+  const hue = useTransform(effectiveProgress, [0.7, 0.95], [0, 35]);
+  const bright = useTransform(effectiveProgress, [0.7, 0.95], [1, 0.7]);
+  const sat = useTransform(effectiveProgress, [0.7, 0.95], [1, 1.35]);
   const sceneFilter = useTransform(
     [hue, bright, sat],
     ([h, b, s]) =>
       `hue-rotate(${h}deg) brightness(${b}) saturate(${s})`,
   );
 
-  const groundY = useTransform(scrollYProgress, [0.85, 1], [200, 0]);
-  const hintOpacity = useTransform(scrollYProgress, [0, 0.08, 0.2], [1, 1, 0]);
+  const groundY = useTransform(effectiveProgress, [0.85, 1], [200, 0]);
+  const hintOpacity = useTransform(effectiveProgress, [0, 0.08, 0.2], [1, 1, 0]);
 
   const sparseStars = useMemo(
     () => buildStarBg({ count: 22, sizeMin: 1.5, sizeMax: 2.5 }, "sparse"),
@@ -139,7 +166,7 @@ export function CosmosHero({ dict }: Props) {
       ref={ref}
       data-gd-section="hero"
       className="relative w-full"
-      style={{ height: "200vh" }}
+      style={{ height: "300vh" }}
     >
       <div className="sticky top-0 h-screen w-full overflow-hidden">
         <motion.div
