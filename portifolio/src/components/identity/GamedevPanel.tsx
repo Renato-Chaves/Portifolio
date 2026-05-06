@@ -1,6 +1,6 @@
 "use client";
 
-import { forwardRef } from "react";
+import { forwardRef, useState } from "react";
 import { GameScene } from "@/components/canvas/GameScene";
 import type { Dictionary } from "@/lib/i18n";
 
@@ -24,12 +24,19 @@ export const GamedevPanel = forwardRef<HTMLDivElement, Props>(function GamedevPa
   const chromeFade = 1 - Math.min(1, warp * 1.6);
   const pipeMaskRadius = (1 - warp) * 180;
 
+  const [coins, setCoins] = useState(42);
+  const handleCollectCoin = () => {
+    if (!interactive) return;
+    setCoins((c) => Math.min(9999, c + 1));
+  };
+
   return (
     <div
       ref={ref}
       className={`absolute inset-0 overflow-hidden ${interactive ? "cursor-gd" : ""}`}
       onMouseEnter={() => onHoverChange(true)}
       onMouseLeave={() => onHoverChange(false)}
+      onClick={handleCollectCoin}
       style={{
         background:
           "linear-gradient(180deg, #2a1246 0%, #5b1d7a 35%, #d1407c 70%, #ff9567 100%)",
@@ -98,10 +105,10 @@ export const GamedevPanel = forwardRef<HTMLDivElement, Props>(function GamedevPa
             textShadow: "2px 2px 0 rgba(0,0,0,0.35)",
           }}
         >
-          <div style={{ color: "var(--gd-accent-3)", letterSpacing: 4 }}>♥ ♥ ♥ ♡ ♡</div>
+          <div style={{ color: "var(--gd-accent-3)", letterSpacing: 4 }}>♥ ♥ ♥ ♥ ♥</div>
           <div>{g.worldLabel}</div>
           <div style={{ color: "var(--gd-accent)" }}>
-            <span style={{ color: "#fff7dc" }}>◉</span> × 0042
+            <span style={{ color: "#fff7dc" }}>◉</span> × {String(coins).padStart(4, "0")}
           </div>
         </header>
 
@@ -204,7 +211,7 @@ export const GamedevPanel = forwardRef<HTMLDivElement, Props>(function GamedevPa
         }}
       >
         <div>
-          LV <b style={{ color: "var(--gd-accent-2)" }}>24</b> · XP 4820/5000
+          LV <b style={{ color: "var(--gd-accent-2)" }}>22</b> · XP 4820/5000
         </div>
         <div
           style={{

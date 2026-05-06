@@ -89,7 +89,7 @@ export function CosmosHero({ dict }: Props) {
   );
 
   const groundY = useTransform(effectiveProgress, [0.85, 1], [200, 0]);
-  const hintOpacity = useTransform(effectiveProgress, [0, 0.08, 0.2], [1, 1, 0]);
+  const hintOpacity = useTransform(scrollYProgress, [0, 0.04, 0.12], [1, 1, 0]);
 
   const sparseStars = useMemo(
     () => buildStarBg({ count: 22, sizeMin: 1.5, sizeMax: 2.5 }, "sparse"),

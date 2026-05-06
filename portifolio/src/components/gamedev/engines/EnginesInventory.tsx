@@ -1049,7 +1049,8 @@ function GameCard({
   onOpen: (slug: string) => void;
 }) {
   const [hovered, setHovered] = useState(false);
-  const thumb = game.screenshots[0] ?? null;
+  const thumb =
+    game.screenshots.find((s): s is string => typeof s === "string") ?? null;
 
   return (
     <motion.li

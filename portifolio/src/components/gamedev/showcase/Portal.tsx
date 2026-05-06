@@ -66,7 +66,9 @@ export function Portal({
   }, [mx, my, reducedMotion]);
 
   const isPlaceholder = game.status === "placeholder";
-  const posterSrc = game.screenshots[0];
+  const posterSrc = game.screenshots.find(
+    (s): s is string => typeof s === "string",
+  );
 
   return (
     <div

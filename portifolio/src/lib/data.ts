@@ -40,6 +40,7 @@ export type Project = {
   images?: string[];
   shape?: "mobile" | "desktop";
   placeholder?: boolean;
+  comingSoon?: boolean;
 };
 
 export type GithubLanguage = { name: string; pct: number; color: string };
@@ -50,6 +51,7 @@ export type GithubRepo = {
   stars: number;
   color: string;
   href: string;
+  disabled?: boolean;
 };
 
 export type Education = {
@@ -86,6 +88,7 @@ export type AmbientParticle =
 export type GameJamEntry = {
   name: string;
   year: number;
+  theme?: string;
   placement?: string;
 };
 
@@ -102,10 +105,15 @@ export type GameJam = {
   };
 };
 
+export type ShowcaseMedia =
+  | string
+  | { kind: "youtube"; videoId: string; title?: string };
+
 export type GameProject = {
   name: string;
   slug: string;
   status: "shipped" | "wip" | "placeholder";
+  featured?: boolean;
   // visual identity
   logoSrc?: string;
   characterSrc?: string;
@@ -114,14 +122,16 @@ export type GameProject = {
   ambient: AmbientParticle;
   // takeover content
   description?: string;
-  screenshots: string[];
+  screenshots: ShowcaseMedia[];
   engine?: GameEngine;
+  year?: number;
   gameJam?: GameJamEntry;
   tags: string[];
   itchUrl?: string;
   gamejoltUrl?: string;
   htmlEmbedUrl?: string;
   trailerUrl?: string;
+  githubUrl?: string;
 };
 
 export type PortfolioData = {
@@ -153,40 +163,43 @@ export const PORTFOLIO: PortfolioData = {
   handle: "renatochaves.dev",
   email: "renatochaves.dev@gmail.com",
   location: "São Paulo, Brasil",
-  role: "Software Developer",
-  focus: "Tech & AI",
+  role: "Software Engineer",
+  focus: "Full-stack, AI-curious.",
 
   techStack: [
-    { name: "Next.js", cat: "Frontend", level: 90 },
-    { name: "TypeScript", cat: "Core Language", level: 94 },
+    { name: "Next.js", cat: "Frontend", level: 82 },
+    { name: "TypeScript", cat: "Core Language", level: 82 },
     { name: "Golang", cat: "Backend · DDD", level: 78 },
-    { name: "Docker", cat: "Infrastructure", level: 88 },
-    { name: "Node.js", cat: "Backend", level: 90 },
-    { name: "React", cat: "Frontend", level: 90 },
-    { name: "Python", cat: "Tooling · ML", level: 74 },
+    { name: "Docker", cat: "Infrastructure", level: 80 },
+    { name: "Node.js", cat: "Backend", level: 82 },
+    { name: "React", cat: "Frontend", level: 82 },
+    { name: "Python", cat: "Tooling · ML", level: 60 },
     { name: "PostgreSQL", cat: "Databases", level: 82 },
     { name: "Nginx", cat: "Infrastructure", level: 80 },
-    { name: "Git", cat: "Tooling", level: 92 },
+    { name: "Git", cat: "Tooling", level: 82 },
     { name: "React Native", cat: "Mobile", level: 82 },
+    { name: "PowerBI", cat: "Data Viz", level: 70 },
   ],
 
   experience: [
     {
-      role: "Lead Software Developer",
+      role: "Lead Software Engineer",
       company: "Orion Marítima",
       at: "Santos, SP · On-site",
       when: "2024 — Now",
       dur: "~2 yrs",
-      desc: "Lead dev in a two-person team — with no prior in-house dev team, every piece of the stack was built and is maintained from scratch. Own server provisioning, installation, Docker configuration, and security hardening; handle Cloudflare, domain management, and API-security design. Sit in with upper management to scope problems and deliver solutions end-to-end — covering design, performance, architecture, and maintainability — with clean-code principles throughout (the latest project adopts Domain-Driven Design). Mentor a junior developer on best practices and run task delivery through GitHub.",
+      desc: "Lead developer in a two-person team building internal management and automation tools end-to-end. Stack spans Next.js + TypeScript on the frontend, Node.js + Express + PostgreSQL on the backend, all containerized with Docker behind Nginx. Also handle server provisioning, Cloudflare, and domain management, plus PowerBI dashboards integrated with cloud data. Latest projects adopt Domain-Driven Design in Go. Mentor a junior dev and run delivery through GitHub.",
       tags: [
         "TypeScript",
+        "Next.js",
         "Node.js",
-        "Go · DDD",
+        "Express",
+        "PostgreSQL",
         "Docker",
         "Nginx",
-        "PM2",
+        "PowerBI",
+        "Go · DDD",
         "Cloudflare",
-        "API Security",
         "Mentoring",
       ],
     },
@@ -197,10 +210,9 @@ export const PORTFOLIO: PortfolioData = {
       cat: "Frontend",
       idx: "01",
       items: [
-        { name: "TypeScript", p: 5 },
-        { name: "React / Next.js", p: 5 },
-        { name: "CSS / Tailwind", p: 5 },
-        { name: "NativeWind", p: 4 },
+        { name: "TypeScript", p: 4 },
+        { name: "React / Next.js", p: 4 },
+        { name: "CSS / Tailwind", p: 4 },
         { name: "Figma", p: 3 },
       ],
     },
@@ -208,10 +220,10 @@ export const PORTFOLIO: PortfolioData = {
       cat: "Backend",
       idx: "02",
       items: [
-        { name: "Node.js", p: 5 },
+        { name: "Node.js", p: 4 },
         { name: "Golang (DDD)", p: 4 },
         { name: "Python", p: 3 },
-        { name: "REST APIs", p: 5 },
+        { name: "REST APIs", p: 4 },
         { name: "SQL", p: 4 },
       ],
     },
@@ -229,8 +241,8 @@ export const PORTFOLIO: PortfolioData = {
       cat: "Infra & DevOps",
       idx: "04",
       items: [
-        { name: "Docker / Compose", p: 5 },
-        { name: "Ubuntu Server", p: 5 },
+        { name: "Docker / Compose", p: 4 },
+        { name: "Ubuntu Server", p: 4 },
         { name: "Nginx", p: 4 },
         { name: "PM2 / Portainer", p: 4 },
         { name: "Cloudflare", p: 4 },
@@ -240,17 +252,16 @@ export const PORTFOLIO: PortfolioData = {
       cat: "Tooling",
       idx: "05",
       items: [
-        { name: "Git / GitHub", p: 5 },
+        { name: "Git / GitHub", p: 4 },
         { name: "CI/CD pipelines", p: 4 },
         { name: "Monorepos", p: 3 },
-        { name: "Figma hand-off", p: 3 },
       ],
     },
     {
       cat: "Craft",
       idx: "06",
       items: [
-        { name: "Legacy modernization", p: 5 },
+        { name: "Legacy modernization", p: 4 },
         { name: "Performance budgeting", p: 4 },
         { name: "Production ops", p: 4 },
         { name: "Technical writing", p: 3 },
@@ -266,8 +277,9 @@ export const PORTFOLIO: PortfolioData = {
       num: "01",
       lede: "A cross-platform mobile app that recognizes food from a photo and tracks nutrition. The React Native client captures the image and hands it to a Node backend, which offloads inference to a custom-trained YOLOv9 model running on a GPU workstation and returns normalized nutrition data per portion.",
       tags: ["React Native", "TypeScript", "YOLOv9", "Python", "Node"],
-      repo: "github.com/Renato-Chaves/bitewise",
-      repoHref: "https://github.com/Renato-Chaves",
+      repo: "coming soon",
+      repoHref: "#",
+      comingSoon: true,
       mock: "dashboard",
       images: [
         "/software/BitewiseBG_Mobile.png",
@@ -294,7 +306,7 @@ export const PORTFOLIO: PortfolioData = {
       color: "#67b4ff",
       num: "03",
       lede: "A desktop route-planner inspired by Google Maps, built in Python with an interactive canvas UI. Lets you pick origin and destination on a city graph and watch either Greedy best-first or A* traverse it in real time — comparing explored paths, totals, and heuristics side by side.",
-      tags: ["Python", "A* Search", "Greedy Search", "Tkinter", "SQL Server"],
+      tags: ["Python", "A* Search", "Greedy Search", "CustomTkinter", "SQL Server"],
       repo: "github.com/Renato-Chaves/BeamMaps",
       repoHref: "https://github.com/Renato-Chaves/BeamMaps",
       mock: "graph",
@@ -322,46 +334,55 @@ export const PORTFOLIO: PortfolioData = {
   github: {
     username: "Renato-Chaves",
     languages: [
-      { name: "TypeScript", pct: 46, color: "#67b4ff" },
-      { name: "JavaScript", pct: 22, color: "#ffb066" },
-      { name: "Go", pct: 14, color: "#6ef0e8" },
-      { name: "Python", pct: 10, color: "#c48eff" },
-      { name: "Shell", pct: 5, color: "#ff6b9e" },
-      { name: "Other", pct: 3, color: "#475f82" },
+      { name: "TypeScript", pct: 38, color: "#67b4ff" },
+      { name: "Python", pct: 27, color: "#c48eff" },
+      { name: "C#", pct: 13, color: "#6ef0e8" },
+      { name: "JavaScript", pct: 12, color: "#ffb066" },
+      { name: "Go", pct: 6, color: "#5cffb7" },
+      { name: "Other", pct: 4, color: "#475f82" },
     ],
-    summary: { commits: 812, prs: 64, stars: 28 },
+    summary: { commits: 753, prs: 2, stars: 13 },
     repos: [
       {
         name: "bitewise",
-        desc: "AI-powered cross-platform nutrition tracker (RN + YOLOv9).",
+        desc: "AI-powered cross-platform nutrition tracker (React Native + YOLOv9). Repo is currently private.",
         lang: "TypeScript",
-        stars: 14,
+        stars: 0,
         color: "#67b4ff",
-        href: "https://github.com/Renato-Chaves",
+        href: "#",
+        disabled: true,
       },
       {
-        name: "portifolio",
-        desc: "This site — Next.js 16 + two parallel identities.",
+        name: "KotobaGo",
+        desc: "AI-powered Japanese learning app around comprehensible-input method (Krashen i+1).",
         lang: "TypeScript",
-        stars: 6,
+        stars: 0,
         color: "#67b4ff",
-        href: "https://github.com/Renato-Chaves",
+        href: "https://github.com/Renato-Chaves/KotobaGo",
       },
       {
-        name: "orion-services",
-        desc: "Go (DDD) services powering production workflows.",
-        lang: "Go",
-        stars: 4,
-        color: "#6ef0e8",
-        href: "https://github.com/Renato-Chaves",
+        name: "BeamMaps",
+        desc: "Python GUI route-search visualizer (A* / Greedy) inspired by Google Maps.",
+        lang: "Python",
+        stars: 2,
+        color: "#c48eff",
+        href: "https://github.com/Renato-Chaves/BeamMaps",
       },
       {
-        name: "infra-playbook",
-        desc: "Docker / Nginx / PM2 recipes for self-hosted Node stacks.",
-        lang: "Shell",
-        stars: 4,
-        color: "#ff6b9e",
-        href: "https://github.com/Renato-Chaves",
+        name: "Portifolio",
+        desc: "Interactive Next.js portfolio with two parallel identities (Software + GameDev).",
+        lang: "TypeScript",
+        stars: 0,
+        color: "#67b4ff",
+        href: "https://github.com/Renato-Chaves/Portifolio",
+      },
+      {
+        name: "Phone-Finder",
+        desc: "App to search phones by parts and specs, with backlog of devices and features.",
+        lang: "TypeScript",
+        stars: 1,
+        color: "#67b4ff",
+        href: "https://github.com/Renato-Chaves/Phone-Finder",
       },
     ],
   },
@@ -370,13 +391,23 @@ export const PORTFOLIO: PortfolioData = {
     {
       deg: "B.Sc. Computer Science",
       inst: "UNIP — Santos, SP",
-      note: "Graduated December 2025. Coursework spanned systems, databases, networking, and software engineering fundamentals.",
+      note: "Graduated December 2025 (GPA 8.6/10). TCC: Bitewise — AI-powered nutrition tracker pairing a custom-trained YOLOv9 model with a typed React Native client.",
       when: "2021 — 2025",
+    },
+    {
+      deg: "Curso Técnico de Informática para Internet integrado ao Ensino Médio",
+      inst: "ETEC de Itanhaém",
+      note: "Integrated technical track in web development (HTML, CSS, JavaScript). TCC: Project Phobos — a collaborative document search engine.",
+      when: "2019 — 2021",
     },
   ],
 
   certs: [
     { name: "Cambridge English C1 Advanced (CAE)", issuer: "Cambridge Assessment English" },
+    {
+      name: "Santander Jornada Tech — AWS Cloud Computing (em andamento)",
+      issuer: "DIO · Santander",
+    },
   ],
 
   socials: [
@@ -405,12 +436,19 @@ export const PORTFOLIO: PortfolioData = {
       name: "Restoration Frontier",
       slug: "restoration-frontier",
       status: "shipped",
+      featured: true,
+      year: 2024,
       frameStyle: "tech-ring",
       palette: { primary: "#5cffb7", accent: "#67b4ff", bg: "#0e2030" },
       ambient: "sparkles",
       description:
         "A cooperative multiplayer game where a team of robots cleans pollution from a planet. Collect scrap, bring it to recycling stations to build automation machines, destroy pollution sources, and ultimately reach and demolish a mega-factory. Pollution clouds block vision, resources gate progression, and the map opens up as the world is restored.",
       screenshots: [
+        {
+          kind: "youtube",
+          videoId: "PvMco2QSBqA",
+          title: "Restoration Frontier — Gameplay Showcase (APS CC5Q41)",
+        },
         "/gamedev/RestorationFrontier_Menu.png",
         "/gamedev/RestorationFrontier_1.png",
         "/gamedev/RestorationFrontier_2.png",
@@ -421,13 +459,15 @@ export const PORTFOLIO: PortfolioData = {
       ],
       engine: "Unity 3D",
       tags: ["3D", "Multiplayer", "Co-op", "Sci-Fi"],
-      // TODO: paste links when ready
-      // trailerUrl: "https://www.youtube.com/...",
+      trailerUrl: "https://www.youtube.com/watch?v=PvMco2QSBqA",
+      githubUrl: "https://github.com/Renato-Chaves/Restoration-Frontier",
     },
     {
       name: "Rushing to the Top",
       slug: "rushing-to-the-top",
       status: "shipped",
+      featured: true,
+      year: 2021,
       frameStyle: "stone-arch",
       palette: { primary: "#ffd23f", accent: "#ff6b9e", bg: "#2a1015" },
       ambient: "embers",
@@ -441,14 +481,16 @@ export const PORTFOLIO: PortfolioData = {
         "/gamedev/RushingToTheTop_4.jpg",
       ],
       engine: "Unity 2D",
-      gameJam: { name: "GameJaaj 5", year: 2021, placement: "Theme: Torres" },
+      gameJam: { name: "GameJaaj 5", year: 2021, theme: "Torres" },
       tags: ["2D", "Roguelite", "Shooter", "Pixel"],
-      // TODO: gamejoltUrl
+      gamejoltUrl: "https://gamejolt.com/games/rushingtothetop/574222",
     },
     {
       name: "Plus and Minus",
       slug: "plus-and-minus",
       status: "shipped",
+      featured: true,
+      year: 2021,
       frameStyle: "mystic-gate",
       palette: { primary: "#c48eff", accent: "#5cffb7", bg: "#2a0a48" },
       ambient: "sparkles",
@@ -461,9 +503,9 @@ export const PORTFOLIO: PortfolioData = {
         "/gamedev/PlusAndMinus_3.png",
       ],
       engine: "Unity 3D",
-      gameJam: { name: "Game Jam", year: 2021 },
+      gameJam: { name: "GMTK Game Jam 2021", year: 2021, theme: "Joined Together" },
       tags: ["3D", "Local Co-op", "Physics", "Puzzle"],
-      // TODO: itchUrl
+      itchUrl: "https://renatogamer.itch.io/plus-and-minus",
     },
     {
       name: "???",
@@ -475,9 +517,125 @@ export const PORTFOLIO: PortfolioData = {
       screenshots: [],
       tags: [],
     },
+    {
+      name: "Hero of the Shield",
+      slug: "hero-of-the-shield",
+      status: "shipped",
+      featured: false,
+      year: 2019,
+      frameStyle: "stone-arch",
+      palette: { primary: "#67b4ff", accent: "#5cffb7", bg: "#0e1830" },
+      ambient: "sparkles",
+      description:
+        "A dungeon traversal game where your only weapon is a shield — reflect enemy bullets and solve puzzles to escape.",
+      screenshots: ["/gamedev/HeroOfTheShield_Menu.png"],
+      engine: "Unity 3D",
+      gameJam: {
+        name: "GameJaaj 4",
+        year: 2019,
+        theme: "Seus inimigos são suas armas",
+      },
+      tags: ["3D", "Action", "Puzzle", "Jam"],
+      gamejoltUrl: "https://gamejolt.com/games/shieldhero/460375",
+    },
+    {
+      name: "Looting in the Docks",
+      slug: "looting-in-the-docks",
+      status: "shipped",
+      featured: false,
+      year: 2020,
+      frameStyle: "wooden-door",
+      palette: { primary: "#ffd23f", accent: "#67b4ff", bg: "#1a1a2a" },
+      ambient: "coins",
+      description:
+        "Top-down stealth game — sneak through the docks, avoid guards, and collect 20 gold pieces to win.",
+      screenshots: [
+        "/gamedev/LootingInTheDocks_Menu.png",
+        "/gamedev/LootinInTheDocks_1.png",
+      ],
+      engine: "Clickteam Fusion 2.5",
+      tags: ["2D", "Stealth", "Top-down", "Pixel"],
+      itchUrl: "https://renatogamer.itch.io/looting-in-the-docks",
+    },
+    {
+      name: "Marines Quest",
+      slug: "marines-quest",
+      status: "shipped",
+      featured: false,
+      year: 2019,
+      frameStyle: "wooden-door",
+      palette: { primary: "#5cffb7", accent: "#67b4ff", bg: "#0a1830" },
+      ambient: "sparkles",
+      description:
+        "Submarine combat game — destroy the great wall blocking the path to let your army through, fighting past obstacles and enemies.",
+      screenshots: ["/gamedev/MarinesQuestBackgroundBanner.png"],
+      engine: "Clickteam Fusion 2.5",
+      gameJam: { name: "Mini Jam 33", year: 2019, theme: "Underwater" },
+      tags: ["2D", "Action", "Submarine", "Jam"],
+      itchUrl: "https://renatogamer.itch.io/marines-quest",
+    },
+    {
+      name: "Printer Game",
+      slug: "printer-game",
+      status: "shipped",
+      featured: false,
+      year: 2023,
+      frameStyle: "tech-ring",
+      palette: { primary: "#ffd23f", accent: "#c48eff", bg: "#1a1a2a" },
+      ambient: "dust",
+      description:
+        "Idle game where you control a printer — manage demands and upgrade yourself to be the best printer in the office.",
+      screenshots: [
+        "/gamedev/PrinterGame_01.png",
+        "/gamedev/PrinterGame_02.png",
+      ],
+      engine: "Unity 3D",
+      gameJam: { name: "GMTK Game Jam 2023", year: 2023, theme: "Roles Reversed" },
+      tags: ["3D", "Idle", "Office", "Jam"],
+      itchUrl: "https://renatogamer.itch.io/printer-game",
+    },
+    {
+      name: "Platform — The Game",
+      slug: "platform-the-game",
+      status: "shipped",
+      featured: false,
+      year: 2017,
+      frameStyle: "wooden-door",
+      palette: { primary: "#ff6b9e", accent: "#ffd23f", bg: "#1a0a2a" },
+      ambient: "embers",
+      description:
+        "First-ever game. A 2D platformer with upgrades, shops, and boss fights — built in Construct 2 as a kid.",
+      screenshots: ["/gamedev/PlatformTheGame_Menu.png"],
+      engine: "Construct 2",
+      tags: ["2D", "Platformer", "First Game"],
+      itchUrl: "https://renatogamer.itch.io/platform-the-game",
+      gamejoltUrl: "https://gamejolt.com/games/Platform-TheGame/338795",
+    },
   ],
 
   gameJams: [
+    {
+      slug: "mini-jam-33-2019",
+      name: "Mini Jam 33",
+      year: 2019,
+      theme: "Underwater",
+      entry: {
+        name: "Marines Quest",
+        thumbnail: "/gamedev/MarinesQuestBackgroundBanner.png",
+        url: "https://itch.io/jam/mini-jam-33-underwater",
+      },
+    },
+    {
+      slug: "gamejaaj-4-2019",
+      name: "GameJaaj 4",
+      year: 2019,
+      theme: "Seus inimigos são suas armas",
+      entry: {
+        name: "Hero of the Shield",
+        thumbnail: "/gamedev/HeroOfTheShield_Menu.png",
+        url: "https://gamejolt.com/search/games?q=%23gamejaaj4",
+      },
+    },
     {
       slug: "gamejaaj-5-2021",
       name: "GameJaaj 5",
@@ -492,27 +650,22 @@ export const PORTFOLIO: PortfolioData = {
       slug: "gmtk-21",
       name: "GMTK Game Jam 2021",
       year: 2021,
+      theme: "Joined Together",
       entry: {
         name: "Plus and Minus",
         thumbnail: "/gamedev/PlusAndMinusBackgroundBanner.png",
-        url: "https://itch.io/jam/gmtk-2021"
+        url: "https://itch.io/jam/gmtk-2021",
       },
     },
     {
-      slug: "itch-game-jam-2020",
-      name: "Itch.io Game Jam",
-      year: 2020,
+      slug: "gmtk-23-2023",
+      name: "GMTK Game Jam 2023",
+      year: 2023,
+      theme: "Roles Reversed",
       entry: {
-        name: "Looting in the Docks",
-        thumbnail: "/gamedev/LootingInTheDocks_Menu.png",
-      },
-    },
-    {
-      slug: "itch-weekend-jam-2019",
-      name: "Itch.io Weekend Jam",
-      year: 2019,
-      entry: {
-        name: "Marines Quest",
+        name: "Printer Game",
+        thumbnail: "/gamedev/PrinterGame_01.png",
+        url: "https://itch.io/jam/gmtk-2023",
       },
     },
   ],

@@ -22,7 +22,7 @@ export function ProjectMock({
           alt={alt ?? ""}
           fill
           sizes="(max-width: 900px) 90vw, 45vw"
-          style={{ objectFit: "cover", objectPosition: "top center" }}
+          style={{ objectFit: "contain", objectPosition: "center" }}
         />
       </div>
     );

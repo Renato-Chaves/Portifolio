@@ -1,22 +1,45 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import type { ShowcaseMedia } from "@/lib/data";
 
 export function ScreenshotGallery({
   screenshots,
   palette,
   fallbackTitle,
+  comingSoonLabel,
 }: {
-  screenshots: string[];
+  screenshots: ShowcaseMedia[];
   palette: { primary: string; accent: string; bg: string };
   fallbackTitle: string;
+  comingSoonLabel: string;
 }) {
   const [idx, setIdx] = useState(0);
+  const [expanded, setExpanded] = useState(false);
   const has = screenshots.length > 0;
   const total = Math.max(1, screenshots.length);
   const next = () => setIdx((i) => (i + 1) % total);
   const prev = () => setIdx((i) => (i - 1 + total) % total);
+
+  const current = has ? screenshots[idx] : null;
+  const isImage =
+    current !== null &&
+    !(typeof current === "object" && current.kind === "youtube");
+  const expandedSrc = isImage ? (current as string) : null;
+
+  useEffect(() => {
+    if (!expanded) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setExpanded(false);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [expanded]);
+
+  useEffect(() => {
+    if (!isImage && expanded) setExpanded(false);
+  }, [isImage, expanded]);
 
   return (
     <div
@@ -45,16 +68,37 @@ export function ScreenshotGallery({
           }}
         >
           {has ? (
-            <img
-              src={screenshots[idx]}
-              alt=""
-              style={{
-                width: "100%",
-                height: "100%",
-                objectFit: "cover",
-                imageRendering: "pixelated",
-              }}
-            />
+            (() => {
+              const item = screenshots[idx];
+              if (typeof item === "object" && item.kind === "youtube") {
+                return (
+                  <iframe
+                    src={`https://www.youtube-nocookie.com/embed/${item.videoId}?rel=0&modestbranding=1`}
+                    title={item.title ?? "Gameplay video"}
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowFullScreen
+                    style={{
+                      width: "100%",
+                      height: "100%",
+                      border: 0,
+                      background: "#000",
+                    }}
+                  />
+                );
+              }
+              return (
+                <img
+                  src={item as string}
+                  alt=""
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    objectFit: "cover",
+                    imageRendering: "pixelated",
+                  }}
+                />
+              );
+            })()
           ) : (
             <div
               style={{
@@ -87,7 +131,7 @@ export function ScreenshotGallery({
                     opacity: 0.8,
                   }}
                 >
-                  Screenshot coming soon
+                  {comingSoonLabel}
                 </div>
               </div>
             </div>
@@ -100,6 +144,32 @@ export function ScreenshotGallery({
         className="gd-scanlines"
         style={{ position: "absolute", inset: 0, pointerEvents: "none", opacity: 0.3 }}
       />
+
+      {isImage && (
+        <button
+          type="button"
+          onClick={() => setExpanded(true)}
+          aria-label="View full image"
+          style={{
+            position: "absolute",
+            top: 12,
+            right: 12,
+            width: 36,
+            height: 36,
+            background: "rgba(0,0,0,0.6)",
+            color: palette.primary,
+            border: `2px solid ${palette.primary}`,
+            fontFamily: "var(--font-press-start), monospace",
+            fontSize: 14,
+            cursor: "pointer",
+            display: "grid",
+            placeItems: "center",
+            lineHeight: 1,
+          }}
+        >
+          ⛶
+        </button>
+      )}
 
       {has && screenshots.length > 1 && (
         <>
@@ -175,6 +245,70 @@ export function ScreenshotGallery({
           </div>
         </>
       )}
+
+      <AnimatePresence>
+        {expanded && expandedSrc && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            onClick={() => setExpanded(false)}
+            role="dialog"
+            aria-modal="true"
+            aria-label="Full screenshot view"
+            style={{
+              position: "fixed",
+              inset: 0,
+              zIndex: 200,
+              background: "rgba(0,0,0,0.92)",
+              display: "grid",
+              placeItems: "center",
+              padding: 24,
+              cursor: "zoom-out",
+            }}
+          >
+            <motion.img
+              key={expandedSrc}
+              src={expandedSrc}
+              alt=""
+              initial={{ scale: 0.92, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.92, opacity: 0 }}
+              transition={{ type: "spring", stiffness: 200, damping: 24 }}
+              onClick={(e) => e.stopPropagation()}
+              style={{
+                width: "90vw",
+                height: "85vh",
+                objectFit: "contain",
+                imageRendering: "pixelated",
+                boxShadow: "0 20px 60px rgba(0,0,0,0.6)",
+                cursor: "default",
+              }}
+            />
+            <button
+              type="button"
+              onClick={() => setExpanded(false)}
+              aria-label="Close full image"
+              style={{
+                position: "fixed",
+                top: 20,
+                right: 20,
+                width: 44,
+                height: 44,
+                background: "rgba(0,0,0,0.7)",
+                color: palette.primary,
+                border: `2px solid ${palette.primary}`,
+                fontFamily: "var(--font-press-start), monospace",
+                fontSize: 14,
+                cursor: "pointer",
+              }}
+            >
+              ✕
+            </button>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

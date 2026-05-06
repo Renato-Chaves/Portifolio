@@ -196,7 +196,7 @@ function JamStamp({
             color: "#9e1f3f",
           }}
         >
-          ★ COMPLETED
+          {dict.gamedev.portalHub.completedLabel}
         </div>
         <div
           style={{
@@ -259,7 +259,7 @@ function JamStamp({
             letterSpacing: 2,
           }}
         >
-          ▢ NO IMAGE
+          {dict.gamedev.portalHub.noImageLabel}
         </div>
       )}
 

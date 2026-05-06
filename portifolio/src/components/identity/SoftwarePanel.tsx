@@ -309,10 +309,10 @@ export const SoftwarePanel = forwardRef<HTMLDivElement, Props>(function Software
               opacity: 0.7,
             }}
           >
-            {s.statsUptime}
+            {s.statsCuriosity}
           </b>
-          99.98%
-          <span className="sw-stats-bar" style={{ "--v": "99%" } as React.CSSProperties} />
+          {s.statsCuriosityValue}
+          <span className="sw-stats-bar" style={{ "--v": "92%" } as React.CSSProperties} />
         </div>
         <div style={{ marginBottom: 14 }}>
           <b
@@ -326,10 +326,10 @@ export const SoftwarePanel = forwardRef<HTMLDivElement, Props>(function Software
               opacity: 0.7,
             }}
           >
-            {s.statsCommits}
+            {s.statsCraft}
           </b>
-          84
-          <span className="sw-stats-bar" style={{ "--v": "72%" } as React.CSSProperties} />
+          {s.statsCraftValue}
+          <span className="sw-stats-bar" style={{ "--v": "86%" } as React.CSSProperties} />
         </div>
         <div>
           <b
@@ -343,9 +343,9 @@ export const SoftwarePanel = forwardRef<HTMLDivElement, Props>(function Software
               opacity: 0.7,
             }}
           >
-            {s.statsFocus}
+            {s.statsDesign}
           </b>
-          {s.statsFocusValue}
+          {s.statsDesignValue}
           <span className="sw-stats-bar" style={{ "--v": "88%" } as React.CSSProperties} />
         </div>
       </div>
@@ -377,7 +377,7 @@ export const SoftwarePanel = forwardRef<HTMLDivElement, Props>(function Software
         </div>
         <div>
           <span className="ln">04</span>&nbsp;&nbsp;stack: [<span className="st">{"'ts'"}</span>,{" "}
-          <span className="st">{"'rust'"}</span>, <span className="st">{"'go'"}</span>],
+          <span className="st">{"'next'"}</span>, <span className="st">{"'go'"}</span>],
         </div>
         <div>
           <span className="ln">05</span>&nbsp;&nbsp;<span className="fn">enter</span>: () ={">"}{" "}

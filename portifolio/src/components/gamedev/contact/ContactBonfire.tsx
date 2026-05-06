@@ -34,8 +34,7 @@ export function ContactBonfire({
       {
         key: "itch",
         label: dict.gamedev.contact.signposts.itch,
-        value: "@renatochaves",
-        // TODO: actual itch.io url
+        value: dict.gamedev.contact.signposts.itchValue,
         href: "https://renatogamer.itch.io/",
         external: true,
         accent: "#ff9567",
@@ -44,8 +43,7 @@ export function ContactBonfire({
       {
         key: "gamejolt",
         label: dict.gamedev.contact.signposts.gamejolt,
-        value: "@renatochaves",
-        // TODO: actual gamejolt url
+        value: dict.gamedev.contact.signposts.gamejoltValue,
         href: "https://gamejolt.com/@RenatoGamer100/games",
         external: true,
         accent: "#5cffb7",
@@ -54,9 +52,9 @@ export function ContactBonfire({
       {
         key: "steam",
         label: dict.gamedev.contact.signposts.steam,
-        value: "ReGamer100",
-        href: "#",
-        external: false,
+        value: dict.gamedev.contact.signposts.steamValue,
+        href: "https://steamcommunity.com/profiles/76561198161197140/",
+        external: true,
         accent: "#67b4ff",
         logo: { type: "svg", path: siSteam.path },
       },

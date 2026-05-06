@@ -34,7 +34,7 @@ export function AboutSection({ dict }: { dict: Dictionary }) {
                 <div className="portrait-overlay" />
               </div>
               <div className="scan" />
-              <div className="coord">[ 1920 × 2400 · 4:5 ]</div>
+              <div className="coord">[ TS · NEXT · GO ]</div>
             </div>
             <div className="bio">
               <h3>{a.h3}</h3>

@@ -88,7 +88,6 @@ export function ContactSection({
 
         <div className="footer">
           <div>© {year} {d.name.toUpperCase()}</div>
-          <div>{c.footerBuilt}</div>
           <div>{c.footerIdentity}</div>
         </div>
       </div>

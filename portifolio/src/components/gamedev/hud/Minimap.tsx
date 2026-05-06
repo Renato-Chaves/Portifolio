@@ -19,6 +19,7 @@ export function Minimap({ dict }: { dict: Dictionary }) {
   const { scrollToTarget } = useGdScroll();
   const [activeIdx, setActiveIdx] = useState(0);
   const [available, setAvailable] = useState<Set<SectionKey>>(new Set());
+  const [open, setOpen] = useState(true);
 
   useEffect(() => {
     const present = new Set<SectionKey>();
@@ -53,6 +54,35 @@ export function Minimap({ dict }: { dict: Dictionary }) {
     }
   };
 
+  if (!open) {
+    return (
+      <button
+        type="button"
+        onClick={() => setOpen(true)}
+        aria-label="Show minimap"
+        style={{
+          position: "fixed",
+          top: 24,
+          right: 24,
+          zIndex: 60,
+          width: 36,
+          height: 36,
+          fontFamily: "var(--font-press-start), monospace",
+          fontSize: 10,
+          color: "var(--gd-ink)",
+          background: "rgba(10, 4, 24, 0.88)",
+          border: "2px solid var(--gd-accent)",
+          boxShadow: "3px 3px 0 rgba(0,0,0,0.6)",
+          textShadow: "1px 1px 0 #3a0f5e",
+          cursor: "pointer",
+          imageRendering: "pixelated",
+        }}
+      >
+        ▣
+      </button>
+    );
+  }
+
   return (
     <div
       style={{
@@ -86,8 +116,27 @@ export function Minimap({ dict }: { dict: Dictionary }) {
         }}
       >
         <span>▣ {dict.gamedev.minimap.label}</span>
-        <span style={{ color: "var(--gd-accent-2)", letterSpacing: 1 }}>
-          {String(activeIdx + 1).padStart(2, "0")}/0{SECTIONS.length}
+        <span style={{ display: "flex", alignItems: "center", gap: 6 }}>
+          <span style={{ color: "var(--gd-accent-2)", letterSpacing: 1 }}>
+            {String(activeIdx + 1).padStart(2, "0")}/0{SECTIONS.length}
+          </span>
+          <button
+            type="button"
+            onClick={() => setOpen(false)}
+            aria-label="Hide minimap"
+            style={{
+              background: "transparent",
+              border: "none",
+              color: "var(--gd-accent)",
+              fontSize: 10,
+              cursor: "pointer",
+              padding: 0,
+              lineHeight: 1,
+              fontFamily: "inherit",
+            }}
+          >
+            ✕
+          </button>
         </span>
       </div>
 

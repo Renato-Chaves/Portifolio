@@ -46,7 +46,7 @@ export function GameDeepDive({
         position: "fixed",
         inset: 0,
         zIndex: 100,
-        background: `radial-gradient(circle at 50% 50%, ${game.palette.primary}22, ${game.palette.bg} 65%, #050018 100%)`,
+        background: `radial-gradient(circle at 50% 50%, ${game.palette.primary}20, ${game.palette.bg} 75%, ${game.palette.bg} 100%)`,
         overflow: "auto",
       }}
     >
@@ -158,6 +158,7 @@ export function GameDeepDive({
               screenshots={game.screenshots}
               palette={game.palette}
               fallbackTitle={game.name}
+              comingSoonLabel={dict.gamedev.portalHub.screenshotComingSoon}
             />
           </motion.div>
 

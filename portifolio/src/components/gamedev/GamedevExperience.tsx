@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { PORTFOLIO } from "@/lib/data";
 import type { Dictionary, Locale } from "@/lib/i18n";
 import { GamedevScrollProvider } from "./GamedevScrollProvider";
@@ -28,6 +29,28 @@ export function GamedevExperience({
           overflowX: "clip",
         }}
       >
+        <Link
+          href={`/${locale}`}
+          aria-label="Back to identity selection"
+          style={{
+            position: "fixed",
+            top: 18,
+            left: 18,
+            zIndex: 60,
+            padding: "10px 14px",
+            fontFamily: "var(--font-press-start), monospace",
+            fontSize: 10,
+            letterSpacing: "0.18em",
+            color: "var(--gd-ink)",
+            background: "rgba(0,0,0,0.55)",
+            border: "2px solid var(--gd-accent)",
+            textShadow: "2px 2px 0 #3a0f5e",
+            boxShadow: "3px 3px 0 #3a0f5e",
+            textDecoration: "none",
+          }}
+        >
+          {dict.gamedev.back}
+        </Link>
         <CosmosHero dict={dict} />
         <StudioRoom dict={dict} />
         <EnginesInventory dict={dict} games={PORTFOLIO.gameProjects} />

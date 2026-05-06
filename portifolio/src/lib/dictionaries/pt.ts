@@ -4,32 +4,34 @@ export const pt: Dictionary = {
   identity: {
     statusLine: "02 IDENTIDADES",
     sysStatus: "SYS.STATUS — ONLINE",
-    nodes: "NODES · 142  ·  LAT 12ms",
+    nodes: "REPOS · +15  ·  YRS 2",
     software: {
       badge: "IDENTIDADE_01 · ENGENHARIA",
       title1: "Desenvolvedor",
       title2: "de Software",
-      line1: "Sistemas, interfaces e o ofício silencioso de deixá-los confiáveis.",
+      line1: "Construindo sistemas full-stack do zero à produção.",
       line2Before: "Role para entrar, ou pressione",
       line2After: ".",
       enterPrefix: "$",
       enterCmd: "./entrar",
       enterArg: "—software",
       enterAria: "Entrar no portfólio de Desenvolvedor de Software",
-      statsUptime: "UPTIME",
-      statsCommits: "COMMITS/SEM",
-      statsFocus: "FOCO",
-      statsFocusValue: "INTENSO",
+      statsCuriosity: "CURIOSIDADE",
+      statsCuriosityValue: "SEMPRE",
+      statsCraft: "QUALIDADE",
+      statsCraftValue: "ATENCIOSO",
+      statsDesign: "DESIGN",
+      statsDesignValue: "MODERNO",
     },
     gamedev: {
       title1: "GAME",
       title2: "DEV",
       title3: "WORLD",
-      tagline: "UM MUNDO COLORIDO DE MÁQUINAS MINIATURAS",
+      tagline: "ONDE PROTÓTIPOS GANHAM VIDA",
       start: "▶ APERTE START",
       navPrev: "◀",
       navNext: "▶",
-      worldLabel: "MUNDO 2-1",
+      worldLabel: "MUNDO 1-1",
     },
     panelLabels: {
       software: "Desenvolvedor de Software",
@@ -38,19 +40,15 @@ export const pt: Dictionary = {
   },
 
   gamedev: {
-    player: "> PLAYER 02 <",
-    comingLine1: "EM BREVE",
-    comingLine2: "CHEGANDO",
-    body1: "O PORTFÓLIO DE DESENVOLVIMENTO DE JOGOS ESTÁ EM CONSTRUÇÃO.",
-    body2Prefix: "VOLTE EM BREVE PARA VER MÁQUINAS MINIATURAS",
-    back: "◀ PRESSIONE B · VOLTAR",
+    player: "> PLAYER 01 <",
+    back: "◀ VOLTAR",
 
     hero: {
       title1: "GAME",
       title2: "DEV",
       title3: "WORLD",
-      tagline: "PIXELS · MUNDOS · MÁQUINAS MINIATURAS",
-      scrollHint: "ROLE PARA NAVEGAR",
+      tagline: "PIXELS · MUNDOS · PROTÓTIPOS",
+      scrollHint: "ROLE PARA COMEÇAR",
     },
 
     portalHub: {
@@ -65,10 +63,14 @@ export const pt: Dictionary = {
       visitItch: "ITCH.IO",
       visitGamejolt: "GAMEJOLT",
       watchTrailer: "TRAILER",
+      viewSource: "VER CÓDIGO",
       engineLabel: "ENGINE",
       jamLabel: "GAME JAM",
       tagsLabel: "TAGS",
       noDescription: "Mais detalhes em breve.",
+      completedLabel: "★ COMPLETO",
+      noImageLabel: "▢ SEM IMAGEM",
+      screenshotComingSoon: "Screenshot em breve",
     },
 
     quests: {
@@ -116,14 +118,14 @@ export const pt: Dictionary = {
       intro: "Oi — sou o Renato. Faço jogos quando não estou fazendo software.",
       paragraphs: [
         "Meu primeiro jogo foi um plataforma 2D no Construct 2 — chefes, lojas, o pacote completo. Eu era um moleque tentando descobrir por que a engine ficava comendo meus saves. Uns anos e quatro engines depois, a resposta continua a mesma: 'porque esqueci de chamar o save.' Alguns bugs te acompanham para sempre.",
-        "A maior parte dos meus jogos sai de jams — o tipo de restrição que transforma uma ideia vaga em uma coisinha pronta em 48 horas. Adoro o formato. Solo no design e código, às vezes puxando um amigo pra arte quando o prazo aperta. Cada jogo tem o estilo dele porque cada jogo é um pequeno experimento próprio.",
+        "A maior parte dos meus jogos sai de jams — o tipo de restrição que transforma uma ideia vaga em uma coisinha pronta em 48 horas. Adoro o formato. Solo no design e código, às vezes formando dupla com amigos que cuidam da arte. Cada jogo tem o estilo dele porque cada jogo é um pequeno experimento próprio.",
         "Hoje o foco é o Restoration Frontier — um jogo cooperativo multiplayer onde robôs limpam um planeta poluído. Vários fins-de-semana longos em Unity 3D. Netcode multiplayer te ensina humildade e eu recomendo a quem quer se sentir pequeno.",
       ],
       stats: {
         class: { label: "CLASSE", value: "GAME DEV" },
-        level: { label: "LV", value: "12 ANOS" },
-        engines: { label: "ENGINES", value: "4 / 4" },
-        jams: { label: "JAMS", value: "4" },
+        level: { label: "LV", value: "9 ANOS" },
+        engines: { label: "ENGINE", value: "Unity" },
+        jams: { label: "JAMS", value: "4+" },
       },
     },
 
@@ -140,16 +142,16 @@ export const pt: Dictionary = {
           blurb: "Onde tudo começou — um plataforma 2D com lojas e chefes.",
         },
         "Clickteam Fusion 2.5": {
-          years: "2019 — 2020",
-          blurb: "Engine de jam. Protótipo rápido, stealth top-down, builds de fim-de-semana.",
+          years: "2018 — 2020",
+          blurb: "Engine de jam. Protótipo rápido, stealth top-down, builds de fim-de-semana — até bater no teto de performance e migrar para Unity.",
         },
         "Unity 2D": {
-          years: "2021",
+          years: "2019 — Hoje",
           blurb: "Shooter roguelite para a GameJaaj 5 — sobreviva à maré subindo.",
         },
         "Unity 3D": {
-          years: "2021 — 2024",
-          blurb: "Multiplayer, física, co-op — casa atual dos projetos maiores.",
+          years: "2019 — Hoje",
+          blurb: "Comecei aqui em 2019 com projetos de jam. Hoje é a casa dos projetos maiores — mais recentemente o Restoration Frontier (multiplayer, física, co-op).",
         },
       },
     },
@@ -169,8 +171,11 @@ export const pt: Dictionary = {
       blurb: "De passagem? Mande uma mensagem — ou siga a fumaça.",
       signposts: {
         itch: "ITCH.IO",
+        itchValue: "@renatogamer",
         gamejolt: "GAMEJOLT",
+        gamejoltValue: "@RenatoGamer100",
         steam: "STEAM",
+        steamValue: "ReGamer100",
         email: "E-MAIL",
       },
       crossLabel: "IDENTIDADE PARALELA · 01",
@@ -209,11 +214,11 @@ export const pt: Dictionary = {
     focus: "FOCO",
     roleValue: "Desenvolvedor de Software",
     locationValue: "São Paulo, Brasil",
-    focusValue: "Tech & IA",
+    focusValue: "Full-Stack, entusiasta por IA.",
     sysInit: "SYS.01",
     sysInitValue: "INIT",
     actKey: "SEC.01_HERO",
-    actValue: "ATO I / III",
+    actValue: "INTRO",
     scroll: "Role",
   },
 
@@ -221,7 +226,7 @@ export const pt: Dictionary = {
     sectionLabel: "SEC.01 · ATO II",
     titleLine1: "Stack",
     titleLine2: "Técnica.",
-    description: "Ferramentas que uso primeiro. Segure o scroll — elas passam por você.",
+    description: "Stack que uso para criar soluções. Segure o scroll.",
     traversal: "TRAVESSIA.TECH",
   },
 
@@ -232,13 +237,13 @@ export const pt: Dictionary = {
     portraitTag: "RETRATO.IMG",
     h3: "Entusiasta de tecnologia e IA — sempre buscando formas de afiar o que consigo construir.",
     paragraphs: [
-      "A maior parte do que sei veio de construir, quebrar e reconstruir até as peças fazerem sentido. No trabalho, lidero um time de duas pessoas em uma empresa de operações marítimas onde a função de desenvolvimento era nova — então toda a stack, do provisionamento de servidor e Docker até segurança de API e deploys, foi construída e é mantida do zero. É o tipo de ambiente que te força a entender cada camada, e eu passei a amar isso.",
+      "A maior parte do que sei veio de construir, quebrar e reconstruir até as peças fazerem sentido. No trabalho, lidero um time de duas pessoas em uma empresa de operações marítimas onde a função de desenvolvimento era nova — então tudo, do provisionamento de servidor e Docker, passando pelo design e arquitetura dos projetos, até desenvolvimento e deploys, foi construído e é mantido do zero. É o tipo de ambiente que te força a entender cada camada, e eu passei a amar isso.",
       "Fora do trabalho, persigo o mesmo instinto em projetos pessoais. O Bitewise combina um modelo YOLOv9 treinado sob medida com um cliente React Native tipado — o celular captura, um backend Node repassa a inferência para uma workstation com GPU, e os dados nutricionais voltam por porção. O KotobaGo é um tutor de japonês local-first que usa Ollama por baixo dos panos para gerar histórias calibradas exatamente pelo seu vocabulário. O fio condutor é IA aplicada de forma pragmática — o suficiente para fazer um produto parecer inteligente sem entregar a ele as chaves.",
     ],
     sig: {
       focus: { label: "FOCO", value: "Produtos com IA, full-stack" },
       habits: { label: "HÁBITOS", value: "Entregar pequeno, dominar toda a stack" },
-      learning: { label: "ESTUDANDO", value: "Serviços de ML aplicado, DDD em Go" },
+      learning: { label: "ESTUDANDO", value: "Padrões de projeto, aplicados" },
     },
   },
 
@@ -251,7 +256,7 @@ export const pt: Dictionary = {
       {
         role: "Desenvolvedor de Software Líder",
         at: "Santos, SP · Presencial",
-        desc: "Dev líder em um time de duas pessoas — sem time interno de desenvolvimento anterior, cada parte da stack foi construída e é mantida do zero. Responsável por provisionamento de servidor, instalação, configuração de Docker e hardening de segurança; cuido de Cloudflare, gerenciamento de domínios e design de segurança de API. Participo com a alta gestão para mapear problemas e entregar soluções end-to-end — cobrindo design, performance, arquitetura e manutenibilidade — sempre com princípios de clean code (o projeto mais recente adota Domain-Driven Design). Mentoro um desenvolvedor júnior em boas práticas e conduzo a entrega de tarefas via GitHub.",
+        desc: "Desenvolvedor líder em um time de duas pessoas, construindo ferramentas internas de gestão e automação de ponta a ponta. A stack envolve Next.js + TypeScript no frontend, Node.js + Express + PostgreSQL no backend, tudo containerizado com Docker atrás do Nginx. Também cuido de provisionamento de servidor, Cloudflare e gerenciamento de domínios, além de dashboards em PowerBI integrados a dados em nuvem. Os projetos mais recentes adotam Domain-Driven Design em Go. Mentoro um desenvolvedor júnior e conduzo a entrega via GitHub.",
       },
     ],
   },
@@ -313,13 +318,21 @@ export const pt: Dictionary = {
     entries: [
       {
         deg: "Bacharelado em Ciência da Computação",
-        note: "Formado em Dezembro de 2025. A grade cobriu sistemas, bancos de dados, redes e fundamentos de engenharia de software.",
+        note: "Formado em dezembro de 2025 (CRA 8.6/10). TCC: Bitewise — rastreador de nutrição com IA, integrando um modelo YOLOv9 customizado a um cliente React Native tipado.",
+      },
+      {
+        deg: "Curso Técnico de Informática para Internet integrado ao Ensino Médio",
+        note: "Curso técnico integrado ao ensino médio em desenvolvimento web (HTML, CSS, JavaScript). TCC: Project Phobos — buscador colaborativo de documentos.",
       },
     ],
     certs: [
       {
         name: "Cambridge English C1 Advanced (CAE)",
         issuer: "Cambridge Assessment English",
+      },
+      {
+        name: "Santander Jornada Tech — AWS Cloud Computing (em andamento)",
+        issuer: "DIO · Santander",
       },
     ],
   },
@@ -332,9 +345,8 @@ export const pt: Dictionary = {
     crossH4Plain: "Também construindo em",
     crossH4Em: "outro mundo.",
     crossP:
-      "Pixels coloridos, pequenas máquinas e jogos que não se levam muito a sério.",
-    crossBtn: "Visitar Desenvolvedor de Jogos",
-    footerBuilt: "FEITO COM NEXT.JS · CANVAS · INTENÇÃO",
+      "Onde protótipos ganham vida — pequenos experimentos, ideias estranhas, mundos miniaturas.",
+    crossBtn: "Visitar portfólio gamedev",
     footerIdentity: "IDENTIDADE_01 · ENGENHARIA",
   },
 };
