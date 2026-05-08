@@ -109,7 +109,7 @@ export function CosmosHero({ dict }: Props) {
       <section
         ref={ref}
         className="relative w-full"
-        style={{ height: "100vh" }}
+        style={{ height: "100svh" }}
       >
         <div
           className="absolute inset-0 overflow-hidden"
@@ -168,7 +168,7 @@ export function CosmosHero({ dict }: Props) {
       className="relative w-full"
       style={{ height: "300vh" }}
     >
-      <div className="sticky top-0 h-screen w-full overflow-hidden">
+      <div className="sticky top-0 h-svh w-full overflow-hidden">
         <motion.div
           className="absolute inset-0"
           style={{
@@ -315,6 +315,7 @@ export function CosmosHero({ dict }: Props) {
             letterSpacing: 4,
             animation: "gdBob 2s ease-in-out infinite",
             textShadow: "2px 2px 0 rgba(0,0,0,0.4)",
+            whiteSpace: "nowrap",
           }}
         >
           ▼ {dict.gamedev.hero.scrollHint} ▼

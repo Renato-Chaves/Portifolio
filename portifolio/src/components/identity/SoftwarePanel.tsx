@@ -286,7 +286,7 @@ export const SoftwarePanel = forwardRef<HTMLDivElement, Props>(function Software
 
       {/* Stats bar */}
       <div
-        className="pointer-events-auto absolute top-1/2 -translate-y-1/2"
+        className="sw-stats pointer-events-auto absolute top-1/2 -translate-y-1/2"
         style={{
           left: 44,
           fontFamily: "var(--font-jetbrains-mono), monospace",

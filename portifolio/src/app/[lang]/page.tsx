@@ -7,7 +7,7 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
   if (!hasLocale(lang)) notFound();
   const dict = await getDictionary(lang);
   return (
-    <main className="relative h-screen w-screen overflow-hidden">
+    <main className="relative h-svh w-full overflow-hidden">
       <IdentityStage dict={dict} locale={lang} />
     </main>
   );

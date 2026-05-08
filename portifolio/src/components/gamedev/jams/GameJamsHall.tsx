@@ -17,7 +17,7 @@ export function GameJamsHall({
       style={{
         position: "relative",
         width: "100%",
-        minHeight: "100vh",
+        minHeight: "100svh",
         padding: "120px 24px 140px",
         background:
           "linear-gradient(180deg, #050018 0%, #2a0a48 60%, #3a0f5e 100%)",
@@ -110,7 +110,7 @@ export function GameJamsHall({
             margin: 0,
             padding: 0,
             display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
+            gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 240px), 1fr))",
             gap: 24,
           }}
         >

@@ -134,7 +134,7 @@ export function ProjectsSection({ dict }: { dict: Dictionary }) {
                             alt=""
                             aria-hidden
                             fill
-                            sizes="(max-width: 900px) 45vw, 18vw"
+                            sizes="(max-width: 640px) 40vw, (max-width: 1024px) 45vw, 18vw"
                             className="phone-bg"
                             style={{ objectFit: "cover", objectPosition: "center" }}
                           />
@@ -142,7 +142,7 @@ export function ProjectsSection({ dict }: { dict: Dictionary }) {
                             src={src}
                             alt={`${p.name} screen ${i + 1}`}
                             fill
-                            sizes="(max-width: 900px) 45vw, 18vw"
+                            sizes="(max-width: 640px) 40vw, (max-width: 1024px) 45vw, 18vw"
                             style={{ objectFit: "contain", objectPosition: "center" }}
                           />
                         </div>

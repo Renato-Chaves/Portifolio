@@ -3,11 +3,14 @@
 import { useEffect, useRef, useState } from "react";
 import { PORTFOLIO } from "@/lib/data";
 import type { Dictionary } from "@/lib/i18n";
+import { useBreakpoint } from "@/lib/useBreakpoint";
 import { TechIcon } from "./TechIcon";
 
 export function HeroAct2({ dict }: { dict: Dictionary }) {
   const sectionRef = useRef<HTMLElement | null>(null);
   const [progress, setProgress] = useState(0);
+  const breakpoint = useBreakpoint();
+  const isPhone = breakpoint === "phone";
 
   useEffect(() => {
     const el = sectionRef.current;
@@ -52,7 +55,9 @@ export function HeroAct2({ dict }: { dict: Dictionary }) {
           <div
             className="tech-track"
             style={{
-              transform: `translateX(calc(${enterVw}vw - ${exitPct}%)) translateY(-50%)`,
+              transform: isPhone
+                ? `translateX(calc(${enterVw}vw - ${exitPct}%))`
+                : `translateX(calc(${enterVw}vw - ${exitPct}%)) translateY(-50%)`,
             }}
           >
             {stack.map((t) => (

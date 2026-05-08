@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 import { siGamejolt, siItchdotio, siSteam } from "simple-icons";
 import type { Dictionary, Locale } from "@/lib/i18n";
 import { PORTFOLIO } from "@/lib/data";
+import { useBreakpoint } from "@/lib/useBreakpoint";
 
 type SignpostLogo = { type: "svg"; path: string } | { type: "email" };
 
@@ -27,6 +28,8 @@ export function ContactBonfire({
   locale: Locale;
 }) {
   const router = useRouter();
+  const breakpoint = useBreakpoint();
+  const isPhone = breakpoint === "phone";
   const [warping, setWarping] = useState(false);
 
   const signposts = useMemo<Signpost[]>(
@@ -667,15 +670,16 @@ export function ContactBonfire({
           style={{
             position: "relative",
             marginTop: 16,
-            padding: 28,
+            padding: isPhone ? 20 : 28,
             background:
               "radial-gradient(ellipse at 50% 50%, #0a1638 0%, #050b1c 58%, #02030a 100%)",
             border: "3px solid #5cffb7",
             boxShadow:
               "6px 6px 0 rgba(0,0,0,0.55), inset 0 0 0 2px rgba(255,247,220,0.15)",
             display: "grid",
-            gridTemplateColumns: "auto 1fr auto",
-            gap: 24,
+            gridTemplateColumns: isPhone ? "1fr" : "auto 1fr auto",
+            justifyItems: isPhone ? "start" : "stretch",
+            gap: isPhone ? 16 : 24,
             alignItems: "center",
             overflow: "hidden",
           }}

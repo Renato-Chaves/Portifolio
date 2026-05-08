@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { motion } from "framer-motion";
 import type { GameProject } from "@/lib/data";
 import type { Dictionary } from "@/lib/i18n";
+import { useBreakpoint } from "@/lib/useBreakpoint";
 import { EngineBadge } from "./EngineBadge";
 import { GameJamBadge } from "./GameJamBadge";
 import { ScreenshotGallery } from "./ScreenshotGallery";
@@ -18,6 +19,9 @@ export function GameDeepDive({
   dict: Dictionary;
   onClose: () => void;
 }) {
+  const breakpoint = useBreakpoint();
+  const isCompact = breakpoint === "phone" || breakpoint === "tablet";
+
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") onClose();
@@ -56,7 +60,7 @@ export function GameDeepDive({
         exit={{ scale: 0.7, opacity: 0, filter: "blur(8px)" }}
         transition={{ type: "spring", stiffness: 130, damping: 22, mass: 0.8 }}
         style={{
-          minHeight: "100vh",
+          minHeight: "100svh",
           padding: "32px clamp(20px, 4vw, 64px) 64px",
           color: "var(--gd-ink)",
           fontFamily: "var(--font-vt323), monospace",
@@ -97,8 +101,8 @@ export function GameDeepDive({
               background: "transparent",
               color: "var(--gd-accent-3)",
               border: "2px solid var(--gd-accent-3)",
-              width: 40,
-              height: 40,
+              width: 44,
+              height: 44,
               fontFamily: "var(--font-press-start), monospace",
               fontSize: 14,
               cursor: "pointer",
@@ -144,8 +148,8 @@ export function GameDeepDive({
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: "minmax(0, 1.4fr) minmax(0, 1fr)",
-            gap: 36,
+            gridTemplateColumns: isCompact ? "1fr" : "minmax(0, 1.4fr) minmax(0, 1fr)",
+            gap: isCompact ? 24 : 36,
             alignItems: "start",
           }}
         >
@@ -220,7 +224,7 @@ export function GameDeepDive({
           </motion.div>
         </div>
 
-        {game.characterSrc && (
+        {game.characterSrc && breakpoint !== "phone" && (
           <img
             src={game.characterSrc}
             alt=""
@@ -229,7 +233,7 @@ export function GameDeepDive({
               position: "fixed",
               left: 24,
               bottom: 24,
-              height: 110,
+              height: breakpoint === "tablet" ? 80 : 110,
               imageRendering: "pixelated",
               animation: "gdBob 2s ease-in-out infinite",
               filter: "drop-shadow(4px 4px 0 rgba(0,0,0,0.5))",

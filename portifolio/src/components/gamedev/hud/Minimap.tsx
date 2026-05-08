@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import type { Dictionary } from "@/lib/i18n";
+import { useBreakpoint } from "@/lib/useBreakpoint";
 import { useGdScroll } from "../GamedevScrollProvider";
 
 type SectionKey = keyof Dictionary["gamedev"]["minimap"]["sections"];
@@ -17,6 +18,7 @@ const SECTIONS: SectionKey[] = [
 
 export function Minimap({ dict }: { dict: Dictionary }) {
   const { scrollToTarget } = useGdScroll();
+  const breakpoint = useBreakpoint();
   const [activeIdx, setActiveIdx] = useState(0);
   const [available, setAvailable] = useState<Set<SectionKey>>(new Set());
   const [open, setOpen] = useState(true);
@@ -45,6 +47,8 @@ export function Minimap({ dict }: { dict: Dictionary }) {
     });
     return () => observers.forEach((o) => o.disconnect());
   }, []);
+
+  if (breakpoint === "phone") return null;
 
   const handleClick = (s: SectionKey) => {
     if (!available.has(s)) return;

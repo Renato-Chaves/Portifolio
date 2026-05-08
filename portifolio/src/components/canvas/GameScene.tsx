@@ -64,7 +64,8 @@ export function GameScene({ intensity = 1 }: { intensity?: number }) {
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    const dpr = Math.min(2, window.devicePixelRatio || 1);
+    const isTouch = window.matchMedia("(pointer: coarse)").matches;
+    const dpr = isTouch ? 1 : Math.min(2, window.devicePixelRatio || 1);
     let w = 0;
     let h = 0;
     const mouse = { x: -9999, y: -9999, active: false };
@@ -102,8 +103,10 @@ export function GameScene({ intensity = 1 }: { intensity?: number }) {
 
     resize();
     window.addEventListener("resize", resize);
-    window.addEventListener("mousemove", onMove);
-    canvas.addEventListener("mouseleave", onLeave);
+    if (!isTouch) {
+      window.addEventListener("mousemove", onMove);
+      canvas.addEventListener("mouseleave", onLeave);
+    }
 
     const coinInt = window.setInterval(() => {
       particles.push({
@@ -116,7 +119,7 @@ export function GameScene({ intensity = 1 }: { intensity?: number }) {
         maxAge: 300 + Math.random() * 200,
         phase: Math.random() * Math.PI * 2,
       });
-    }, 700);
+    }, isTouch ? 1400 : 700);
 
     const starInt = window.setInterval(() => {
       particles.push({
@@ -228,8 +231,10 @@ export function GameScene({ intensity = 1 }: { intensity?: number }) {
       window.clearInterval(coinInt);
       window.clearInterval(starInt);
       window.removeEventListener("resize", resize);
-      window.removeEventListener("mousemove", onMove);
-      canvas.removeEventListener("mouseleave", onLeave);
+      if (!isTouch) {
+        window.removeEventListener("mousemove", onMove);
+        canvas.removeEventListener("mouseleave", onLeave);
+      }
     };
   }, []);
 

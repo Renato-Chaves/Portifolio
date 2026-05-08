@@ -11,11 +11,13 @@ import { SoftwareCursor } from "./cursors/SoftwareCursor";
 import { GamedevCursor } from "./cursors/GamedevCursor";
 import { useMouse } from "./cursors/useMouse";
 import { useWheelProgress } from "@/lib/useWheelProgress";
+import { useIsTouch } from "@/lib/useIsTouch";
 
 type Props = { dict: Dictionary; locale: Locale };
 
 export function IdentityStage({ dict, locale }: Props) {
   const router = useRouter();
+  const isTouch = useIsTouch();
   const [activeIdx, setActiveIdx] = useState(0);
   const [swHover, setSwHover] = useState(false);
   const [gdHover, setGdHover] = useState(false);
@@ -57,7 +59,7 @@ export function IdentityStage({ dict, locale }: Props) {
   }, [activeRoute, navigateTo]);
 
   const { progress, triggerEnter, reset } = useWheelProgress({
-    enabled: !transitioning && !navigating,
+    enabled: !transitioning && !navigating && !isTouch,
     onComplete,
   });
 
@@ -91,6 +93,39 @@ export function IdentityStage({ dict, locale }: Props) {
     [activeIdx, transitioning, reset, identities.length],
   );
 
+  useEffect(() => {
+    if (!isTouch || transitioning || navigating) return;
+    const SWIPE_THRESHOLD = 60;
+    let startX = 0;
+    let startY = 0;
+    let tracking = false;
+
+    const onTouchStart = (e: TouchEvent) => {
+      if (e.touches.length !== 1) return;
+      startX = e.touches[0].clientX;
+      startY = e.touches[0].clientY;
+      tracking = true;
+    };
+    const onTouchEnd = (e: TouchEvent) => {
+      if (!tracking) return;
+      tracking = false;
+      const t = e.changedTouches[0];
+      const dx = t.clientX - startX;
+      const dy = t.clientY - startY;
+      if (Math.abs(dx) < SWIPE_THRESHOLD) return;
+      if (Math.abs(dx) < Math.abs(dy)) return;
+      if (dx < 0) setActiveIdx((i) => Math.min(identities.length - 1, i + 1));
+      else setActiveIdx((i) => Math.max(0, i - 1));
+    };
+
+    window.addEventListener("touchstart", onTouchStart, { passive: true });
+    window.addEventListener("touchend", onTouchEnd, { passive: true });
+    return () => {
+      window.removeEventListener("touchstart", onTouchStart);
+      window.removeEventListener("touchend", onTouchEnd);
+    };
+  }, [isTouch, transitioning, navigating, identities.length]);
+
   const isSoftware = identities[activeIdx].key === "software";
   const chromeOpacity = Math.max(0, 1 - progress * 2);
 
@@ -121,8 +156,8 @@ export function IdentityStage({ dict, locale }: Props) {
         </div>
       </div>
 
-      {activeIdx === 0 && <SoftwareCursor pos={swMouse} hovering={swHover} />}
-      {activeIdx === 1 && <GamedevCursor pos={gdMouse} hovering={gdHover} />}
+      {!isTouch && activeIdx === 0 && <SoftwareCursor pos={swMouse} hovering={swHover} />}
+      {!isTouch && activeIdx === 1 && <GamedevCursor pos={gdMouse} hovering={gdHover} />}
 
       <IdentityNav
         identities={identities.map(({ key, label }) => ({ key, label }))}
@@ -131,10 +166,12 @@ export function IdentityStage({ dict, locale }: Props) {
         opacity={chromeOpacity}
       />
 
-      <ScrollIndicator
-        theme={isSoftware ? "software" : "gamedev"}
-        opacity={chromeOpacity * 0.9}
-      />
+      {!isTouch && (
+        <ScrollIndicator
+          theme={isSoftware ? "software" : "gamedev"}
+          opacity={chromeOpacity * 0.9}
+        />
+      )}
     </>
   );
 }

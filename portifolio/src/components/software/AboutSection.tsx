@@ -27,7 +27,7 @@ export function AboutSection({ dict }: { dict: Dictionary }) {
                   src="/profile_picture.jpeg"
                   alt="Renato Chaves portrait"
                   fill
-                  sizes="(max-width: 900px) 60vw, 22vw"
+                  sizes="(max-width: 640px) 90vw, (max-width: 1024px) 60vw, 22vw"
                   style={{ objectFit: "cover", objectPosition: "center" }}
                   priority
                 />

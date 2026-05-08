@@ -6,6 +6,7 @@ import { siUnity, siConstruct3 } from "simple-icons";
 import type { GameEngine, GameProject } from "@/lib/data";
 import type { Dictionary } from "@/lib/i18n";
 import { GameDeepDive } from "@/components/gamedev/showcase/GameDeepDive";
+import { useBreakpoint } from "@/lib/useBreakpoint";
 
 type LogoSvg = { type: "svg"; path: string };
 type LogoGlyph = { type: "glyph"; text: string };
@@ -136,7 +137,7 @@ export function EnginesInventory({
       style={{
         position: "relative",
         width: "100%",
-        minHeight: "100vh",
+        minHeight: "100svh",
         padding: "120px 24px 140px",
         background:
           "radial-gradient(ellipse at center, #1a0530 0%, #050018 70%), #050018",
@@ -293,7 +294,7 @@ function GridView({
         margin: 0,
         padding: 0,
         display: "grid",
-        gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
+        gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 200px), 1fr))",
         gap: 22,
       }}
     >
@@ -568,23 +569,26 @@ function SplitView({
   onSelect: (s: Selection) => void;
   onOpen: (slug: string) => void;
 }) {
+  const bp = useBreakpoint();
+  const isPhone = bp === "phone";
+
   return (
     <div
       style={{
         display: "grid",
-        gridTemplateColumns: "260px 1fr",
-        gap: 22,
+        gridTemplateColumns: isPhone ? "1fr" : "260px 1fr",
+        gap: isPhone ? 18 : 22,
         alignItems: "start",
       }}
     >
-      {/* Left column — ALL + compact engine list */}
+      {/* Engine selector — sidebar on desktop, stacked on phone with games beneath */}
       <ul
         style={{
           listStyle: "none",
           margin: 0,
           padding: 0,
           display: "grid",
-          gap: 12,
+          gap: isPhone ? 10 : 12,
         }}
       >
         {/* ALL row */}

@@ -12,15 +12,21 @@ type Props = {
 export function IdentityNav({ identities, activeIdx, onSwitch, opacity }: Props) {
   const isSoftware = identities[activeIdx].key === "software";
 
-  const dotBase: React.CSSProperties = {
-    width: 10,
-    height: 10,
+  const dotButton: React.CSSProperties = {
+    width: 44,
+    height: 44,
     padding: 0,
     background: "transparent",
     border: "none",
-    position: "relative",
+    display: "grid",
+    placeItems: "center",
     cursor: "inherit",
     transition: "transform 0.25s",
+  };
+  const dotShape: React.CSSProperties = {
+    width: 10,
+    height: 10,
+    position: "relative",
   };
 
   return (
@@ -59,7 +65,7 @@ export function IdentityNav({ identities, activeIdx, onSwitch, opacity }: Props)
         )}
       </button>
 
-      <div className="flex gap-3">
+      <div className="flex">
         {identities.map((id, i) => {
           const active = i === activeIdx;
           const innerStyle: React.CSSProperties = isSoftware
@@ -85,13 +91,14 @@ export function IdentityNav({ identities, activeIdx, onSwitch, opacity }: Props)
             <button
               key={id.key}
               type="button"
-              className="hover:scale-125"
               onClick={() => onSwitch(i)}
               aria-label={`Go to ${id.label}`}
               title={id.label}
-              style={dotBase}
+              style={dotButton}
             >
-              <span style={innerStyle} />
+              <span style={dotShape}>
+                <span style={innerStyle} />
+              </span>
             </button>
           );
         })}

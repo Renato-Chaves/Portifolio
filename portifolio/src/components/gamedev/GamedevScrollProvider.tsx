@@ -37,15 +37,25 @@ export function GamedevScrollProvider({ children }: { children: ReactNode }) {
   const lenisRef = useRef<Lenis | null>(null);
   const [scrollHeight, setScrollHeight] = useState(0);
   const [reducedMotion, setReducedMotion] = useState(false);
+  const [isTouch, setIsTouch] = useState(false);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
-    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
-    setReducedMotion(mq.matches);
-    const handler = () => setReducedMotion(mq.matches);
-    mq.addEventListener("change", handler);
-    return () => mq.removeEventListener("change", handler);
+    const motionMq = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const touchMq = window.matchMedia("(pointer: coarse)");
+    setReducedMotion(motionMq.matches);
+    setIsTouch(touchMq.matches);
+    const onMotion = () => setReducedMotion(motionMq.matches);
+    const onTouch = () => setIsTouch(touchMq.matches);
+    motionMq.addEventListener("change", onMotion);
+    touchMq.addEventListener("change", onTouch);
+    return () => {
+      motionMq.removeEventListener("change", onMotion);
+      touchMq.removeEventListener("change", onTouch);
+    };
   }, []);
+
+  const useNativeScroll = reducedMotion || isTouch;
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -62,7 +72,7 @@ export function GamedevScrollProvider({ children }: { children: ReactNode }) {
       setScrollHeight(max);
     };
 
-    if (reducedMotion) {
+    if (useNativeScroll) {
       const update = () => sync(window.scrollY, computeMax());
       window.addEventListener("scroll", update, { passive: true });
       window.addEventListener("resize", update);
@@ -97,7 +107,7 @@ export function GamedevScrollProvider({ children }: { children: ReactNode }) {
       lenis.destroy();
       lenisRef.current = null;
     };
-  }, [reducedMotion, scrollY, pageProgress]);
+  }, [useNativeScroll, scrollY, pageProgress]);
 
   const scrollToTarget = useCallback(
     (target: number | HTMLElement | string) => {

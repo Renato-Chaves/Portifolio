@@ -19,13 +19,12 @@ type Props = {
   wallDistance: number;
   wallWidth: number;
   wallHeight: number;
+  portalWidth?: number;
+  portalHeight?: number;
   isActive: boolean;
   dict: Dictionary;
   onEnter: () => void;
 };
-
-const PORTAL_W = 320;
-const PORTAL_H = 460;
 
 export function Portal({
   game,
@@ -33,10 +32,14 @@ export function Portal({
   wallDistance,
   wallWidth,
   wallHeight,
+  portalWidth = 320,
+  portalHeight = 460,
   isActive,
   dict,
   onEnter,
 }: Props) {
+  const PORTAL_W = portalWidth;
+  const PORTAL_H = portalHeight;
   const { reducedMotion } = useGdScroll();
   const [hovered, setHovered] = useState(false);
 

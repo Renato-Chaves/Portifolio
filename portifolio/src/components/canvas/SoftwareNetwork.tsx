@@ -32,7 +32,9 @@ export function SoftwareNetwork({ intensity = 1 }: { intensity?: number }) {
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    const dpr = Math.min(2, window.devicePixelRatio || 1);
+    const isTouch = window.matchMedia("(pointer: coarse)").matches;
+    const dpr = isTouch ? 1 : Math.min(2, window.devicePixelRatio || 1);
+    const densityDivisor = isTouch ? 44000 : 22000;
     let w = 0;
     let h = 0;
     let nodes: Node[] = [];
@@ -46,7 +48,7 @@ export function SoftwareNetwork({ intensity = 1 }: { intensity?: number }) {
       canvas.width = w * dpr;
       canvas.height = h * dpr;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      const count = Math.round((w * h) / 22000);
+      const count = Math.round((w * h) / densityDivisor);
       nodes = [];
       for (let i = 0; i < count; i++) {
         nodes.push({
@@ -77,8 +79,10 @@ export function SoftwareNetwork({ intensity = 1 }: { intensity?: number }) {
 
     resize();
     window.addEventListener("resize", resize);
-    window.addEventListener("mousemove", onMove);
-    canvas.addEventListener("mouseleave", onLeave);
+    if (!isTouch) {
+      window.addEventListener("mousemove", onMove);
+      canvas.addEventListener("mouseleave", onLeave);
+    }
 
     const pulseInt = window.setInterval(() => {
       if (!nodes.length) return;
@@ -195,8 +199,10 @@ export function SoftwareNetwork({ intensity = 1 }: { intensity?: number }) {
       cancelAnimationFrame(raf);
       window.clearInterval(pulseInt);
       window.removeEventListener("resize", resize);
-      window.removeEventListener("mousemove", onMove);
-      canvas.removeEventListener("mouseleave", onLeave);
+      if (!isTouch) {
+        window.removeEventListener("mousemove", onMove);
+        canvas.removeEventListener("mouseleave", onLeave);
+      }
     };
   }, []);
 

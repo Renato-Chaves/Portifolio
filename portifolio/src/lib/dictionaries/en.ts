@@ -183,6 +183,8 @@ export const en = {
     online: "ONLINE",
     back: "SELECT",
     backAria: "Back to identity selection",
+    menuOpen: "Open menu",
+    menuClose: "Close menu",
     sections: {
       hero: "Hero",
       about: "About",

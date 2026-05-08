@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { notFound } from "next/navigation";
 import { Space_Grotesk, JetBrains_Mono, Press_Start_2P, VT323 } from "next/font/google";
 import { hasLocale } from "@/lib/i18n";
@@ -31,6 +31,12 @@ const vt323 = VT323({
 export const metadata: Metadata = {
   title: "Renato Chaves — Portfolio",
   description: "Two parallel identities: Software Developer and Game Developer.",
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
 };
 
 export async function generateStaticParams() {

@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import type { Dictionary } from "@/lib/i18n";
+import { useBreakpoint } from "@/lib/useBreakpoint";
 
 type SectionKey = keyof Dictionary["gamedev"]["quests"];
 
@@ -16,11 +17,14 @@ const SECTIONS: SectionKey[] = [
 ];
 
 export function QuestToast({ dict }: { dict: Dictionary }) {
+  const breakpoint = useBreakpoint();
+  const isPhone = breakpoint === "phone";
   const [active, setActive] = useState<SectionKey | null>(null);
   const seenRef = useRef<Set<SectionKey>>(new Set());
   const timerRef = useRef<number | null>(null);
 
   useEffect(() => {
+    if (isPhone) return;
     const observers: IntersectionObserver[] = [];
     SECTIONS.forEach((s) => {
       const el = document.querySelector(`[data-gd-section="${s}"]`);
@@ -52,7 +56,9 @@ export function QuestToast({ dict }: { dict: Dictionary }) {
         window.clearTimeout(timerRef.current);
       }
     };
-  }, []);
+  }, [isPhone]);
+
+  if (isPhone) return null;
 
   return (
     <AnimatePresence>

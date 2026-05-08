@@ -30,8 +30,8 @@ export function StudioRoom({ dict }: { dict: Dictionary }) {
       style={{
         position: "relative",
         width: "100%",
-        minHeight: "100vh",
-        marginTop: reducedMotion ? 0 : "-100vh",
+        minHeight: "100svh",
+        marginTop: reducedMotion ? 0 : "-100svh",
         padding: "112px 24px 140px",
         background: "#120a1f",
         overflow: "hidden",

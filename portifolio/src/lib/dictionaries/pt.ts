@@ -191,6 +191,8 @@ export const pt: Dictionary = {
     online: "ONLINE",
     back: "VOLTAR",
     backAria: "Voltar para a seleção de identidade",
+    menuOpen: "Abrir menu",
+    menuClose: "Fechar menu",
     sections: {
       hero: "Início",
       about: "Sobre",

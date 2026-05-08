@@ -10,16 +10,17 @@ import {
 } from "framer-motion";
 import type { GameProject } from "@/lib/data";
 import type { Dictionary } from "@/lib/i18n";
+import { useBreakpoint } from "@/lib/useBreakpoint";
 import { useGdScroll } from "../GamedevScrollProvider";
 import { Portal } from "./Portal";
 import { PortalUITiles } from "./PortalUITiles";
 import { GameDeepDive } from "./GameDeepDive";
 
-const WALL_DISTANCE = 380;
-const WALL_WIDTH = 900;
-const WALL_HEIGHT = 600;
-const FLOOR_Y = WALL_HEIGHT / 2;
-const FLOOR_RADIUS = 1200;
+const WORLD = {
+  desktop: { wallDistance: 380, wallWidth: 900, wallHeight: 600, floorRadius: 1200, scrollVH: 500, perspective: 1400, portalWidth: 320, portalHeight: 460 },
+  tablet: { wallDistance: 320, wallWidth: 720, wallHeight: 520, floorRadius: 1000, scrollVH: 400, perspective: 1200, portalWidth: 300, portalHeight: 420 },
+  phone: { wallDistance: 260, wallWidth: 420, wallHeight: 320, floorRadius: 720, scrollVH: 300, perspective: 900, portalWidth: 220, portalHeight: 300 },
+} as const;
 
 export function PortalHub({
   dict,
@@ -30,6 +31,14 @@ export function PortalHub({
 }) {
   const ref = useRef<HTMLDivElement>(null);
   const { reducedMotion } = useGdScroll();
+  const breakpoint = useBreakpoint();
+  const world =
+    breakpoint === "phone" ? WORLD.phone : breakpoint === "tablet" ? WORLD.tablet : WORLD.desktop;
+  const WALL_DISTANCE = world.wallDistance;
+  const WALL_WIDTH = world.wallWidth;
+  const WALL_HEIGHT = world.wallHeight;
+  const FLOOR_Y = WALL_HEIGHT / 2;
+  const FLOOR_RADIUS = world.floorRadius;
   const [activeIndex, setActiveIndex] = useState<number>(-1);
   const [openSlug, setOpenSlug] = useState<string | null>(null);
 
@@ -82,9 +91,9 @@ export function PortalHub({
       ref={ref}
       data-gd-section="showcase"
       className="relative w-full"
-      style={{ height: "500vh", background: "#050018" }}
+      style={{ height: `${world.scrollVH}vh`, background: "#050018" }}
     >
-      <div className="sticky top-0 h-screen w-full overflow-hidden">
+      <div className="sticky top-0 h-svh w-full overflow-hidden">
         <div
           aria-hidden
           className="absolute inset-0 pointer-events-none"
@@ -103,7 +112,7 @@ export function PortalHub({
         <div
           className="absolute inset-0"
           style={{
-            perspective: "1400px",
+            perspective: `${world.perspective}px`,
             perspectiveOrigin: "50% 50%",
             zIndex: 10,
           }}
@@ -188,6 +197,8 @@ export function PortalHub({
                 wallDistance={WALL_DISTANCE}
                 wallWidth={WALL_WIDTH}
                 wallHeight={WALL_HEIGHT}
+                portalWidth={world.portalWidth}
+                portalHeight={world.portalHeight}
                 isActive={activeIndex === i}
                 dict={dict}
                 onEnter={() => setOpenSlug(g.slug)}
