@@ -156,6 +156,7 @@ export type PortfolioData = {
   socials: Social[];
   gameProjects: GameProject[];
   gameJams: GameJam[];
+  cv: { en: string; pt: string };
 };
 
 export const PORTFOLIO: PortfolioData = {
@@ -165,6 +166,11 @@ export const PORTFOLIO: PortfolioData = {
   location: "São Paulo, Brasil",
   role: "Software Engineer",
   focus: "Full-stack, AI-curious.",
+
+  cv: {
+    en: "/software/Renato%20Chaves%20Nunes%20-%20CV.pdf",
+    pt: "/software/Renato%20Chaves%20Nunes%20-%20CV%20-%20Pt%20Br.pdf",
+  },
 
   techStack: [
     { name: "Next.js", cat: "Frontend", level: 82 },

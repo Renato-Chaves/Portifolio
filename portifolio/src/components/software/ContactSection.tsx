@@ -7,9 +7,11 @@ import type { Dictionary, Locale } from "@/lib/i18n";
 export function ContactSection({
   dict,
   locale,
+  onOpenCv,
 }: {
   dict: Dictionary;
   locale: Locale;
+  onOpenCv: () => void;
 }) {
   const d = PORTFOLIO;
   const c = dict.contact;
@@ -23,17 +25,41 @@ export function ContactSection({
           <br />
           <em>{c.titleEm}</em>
         </h2>
-        <a className="contact-email" href={`mailto:${d.email}`}>
-          <span>{d.email}</span>
-          <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-            <path
-              d="M3 9h12M10 4l5 5-5 5"
-              stroke="currentColor"
-              strokeWidth="1.5"
-              strokeLinecap="square"
-            />
-          </svg>
-        </a>
+        <div className="contact-actions">
+          <a className="contact-email" href={`mailto:${d.email}`}>
+            <span>{d.email}</span>
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+              <path
+                d="M3 9h12M10 4l5 5-5 5"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                strokeLinecap="square"
+              />
+            </svg>
+          </a>
+          <button
+            type="button"
+            className="contact-cv-btn"
+            onClick={onOpenCv}
+            aria-label={c.cv.button}
+          >
+            <svg width="15" height="15" viewBox="0 0 14 14" fill="none" aria-hidden>
+              <path
+                d="M3 1.5h5L11 4.5v8H3z"
+                stroke="currentColor"
+                strokeWidth="1.2"
+                strokeLinejoin="round"
+              />
+              <path
+                d="M8 1.5v3h3"
+                stroke="currentColor"
+                strokeWidth="1.2"
+                strokeLinejoin="round"
+              />
+            </svg>
+            {c.cv.button}
+          </button>
+        </div>
 
         <div className="contact-grid">
           {d.socials.map((s) => (

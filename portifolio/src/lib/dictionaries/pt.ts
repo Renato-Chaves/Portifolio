@@ -207,6 +207,10 @@ export const pt: Dictionary = {
       en: "EN",
       pt: "PT",
     },
+    cv: {
+      button: "CV",
+      aria: "Ver currículo",
+    },
   },
 
   hero: {
@@ -349,6 +353,17 @@ export const pt: Dictionary = {
     crossP:
       "Onde protótipos ganham vida — pequenos experimentos, ideias estranhas, mundos miniaturas.",
     crossBtn: "Visitar portfólio gamedev",
+    cv: {
+      button: "Ver Curriculo",
+    },
     footerIdentity: "IDENTIDADE_01 · ENGENHARIA",
+  },
+
+  cvModal: {
+    title: "Currículo / CV",
+    langEn: "English",
+    langPt: "Português",
+    download: "Baixar PDF",
+    close: "Fechar",
   },
 };

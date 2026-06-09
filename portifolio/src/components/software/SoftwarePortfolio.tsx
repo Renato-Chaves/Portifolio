@@ -14,6 +14,7 @@ import { ProjectsSection } from "./ProjectsSection";
 import { GithubSection } from "./GithubSection";
 import { EducationSection } from "./EducationSection";
 import { ContactSection } from "./ContactSection";
+import { CvModal } from "./CvModal";
 
 export function SoftwarePortfolio({
   github,
@@ -28,6 +29,7 @@ export function SoftwarePortfolio({
   const [active, setActive] = useState<string>("hero");
   const [navRevealed, setNavRevealed] = useState(false);
   const [pageProgress, setPageProgress] = useState(0);
+  const [cvOpen, setCvOpen] = useState(false);
   const lastY = useRef(0);
 
   useEffect(() => {
@@ -78,6 +80,7 @@ export function SoftwarePortfolio({
         brand={PORTFOLIO.name}
         dict={dict}
         locale={locale}
+        onOpenCv={() => setCvOpen(true)}
       />
       <HeroAct1 scrollY={scrollY} dict={dict} />
       <HeroAct2 dict={dict} />
@@ -87,7 +90,17 @@ export function SoftwarePortfolio({
       <ProjectsSection dict={dict} />
       <GithubSection data={github} dict={dict} />
       <EducationSection dict={dict} />
-      <ContactSection dict={dict} locale={locale} />
+      <ContactSection
+        dict={dict}
+        locale={locale}
+        onOpenCv={() => setCvOpen(true)}
+      />
+      <CvModal
+        open={cvOpen}
+        onClose={() => setCvOpen(false)}
+        dict={dict}
+        locale={locale}
+      />
     </div>
   );
 }

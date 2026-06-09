@@ -199,6 +199,10 @@ export const en = {
       en: "EN",
       pt: "PT",
     },
+    cv: {
+      button: "CV",
+      aria: "View résumé",
+    },
   },
 
   hero: {
@@ -341,7 +345,18 @@ export const en = {
     crossP:
       "Where prototypes come to life — small experiments, weird ideas, tiny worlds.",
     crossBtn: "Visit gamedev portfolio",
+    cv: {
+      button: "View CV",
+    },
     footerIdentity: "IDENTITY_01 · ENGINEERING",
+  },
+
+  cvModal: {
+    title: "Résumé / CV",
+    langEn: "English",
+    langPt: "Português",
+    download: "Download PDF",
+    close: "Close",
   },
 };
 

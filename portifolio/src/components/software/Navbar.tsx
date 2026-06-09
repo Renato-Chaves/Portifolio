@@ -34,9 +34,10 @@ type Props = {
   brand: string;
   dict: Dictionary;
   locale: Locale;
+  onOpenCv: () => void;
 };
 
-export function Navbar({ progress, active, revealed, brand, dict, locale }: Props) {
+export function Navbar({ progress, active, revealed, brand, dict, locale, onOpenCv }: Props) {
   const pathname = usePathname();
   const other: Locale = locale === "en" ? "pt" : "en";
   const otherPath = pathname.replace(/^\/(en|pt)(?=\/|$)/, `/${other}`);
@@ -90,6 +91,28 @@ export function Navbar({ progress, active, revealed, brand, dict, locale }: Prop
             <span className="sep">·</span>
             <span className={locale === "pt" ? "on" : ""}>{dict.nav.langSwitch.pt}</span>
           </Link>
+          <button
+            type="button"
+            className="cv-btn"
+            onClick={onOpenCv}
+            aria-label={dict.nav.cv.aria}
+          >
+            <svg width="13" height="13" viewBox="0 0 14 14" fill="none" aria-hidden>
+              <path
+                d="M3 1.5h5L11 4.5v8H3z"
+                stroke="currentColor"
+                strokeWidth="1.2"
+                strokeLinejoin="round"
+              />
+              <path
+                d="M8 1.5v3h3"
+                stroke="currentColor"
+                strokeWidth="1.2"
+                strokeLinejoin="round"
+              />
+            </svg>
+            {dict.nav.cv.button}
+          </button>
           <span className="pulse" />
           <span className="status-online">{dict.nav.online}</span>
         </div>
@@ -135,6 +158,31 @@ export function Navbar({ progress, active, revealed, brand, dict, locale }: Prop
               </li>
             ))}
           </ul>
+          <button
+            type="button"
+            className="nav-mobile-cv"
+            aria-label={dict.nav.cv.aria}
+            onClick={() => {
+              setMenuOpen(false);
+              onOpenCv();
+            }}
+          >
+            <svg width="15" height="15" viewBox="0 0 14 14" fill="none" aria-hidden>
+              <path
+                d="M3 1.5h5L11 4.5v8H3z"
+                stroke="currentColor"
+                strokeWidth="1.2"
+                strokeLinejoin="round"
+              />
+              <path
+                d="M8 1.5v3h3"
+                stroke="currentColor"
+                strokeWidth="1.2"
+                strokeLinejoin="round"
+              />
+            </svg>
+            {dict.nav.cv.button}
+          </button>
         </aside>
       </div>
     </>
